@@ -1,0 +1,78 @@
+<app-commonbar></app-commonbar>
+<div class="signup-container">
+    <div class="signup-frame">
+        <h2 class="form-header">Signup</h2>
+        <form [formGroup]="signupForm" (ngSubmit)="OnSubmitForm(signupForm)">
+            <div class="label-input-div-container">
+
+                <!-- userName -->
+                <div class="label-input-div">
+                    <label class="form-font">Display Name</label>
+                    <input type="text" id="displayName" formControlName="userName" class="form-input"/>
+                    @if (signupForm.controls['userName'].touched || signupForm.controls['userName'].dirty) {
+                        <small *ngIf="signupForm.controls['userName'].errors?.['required']" class="invalid-input">Name is required!</small>
+                        <small *ngIf="signupForm.controls['userName'].errors?.['minlength'] || signupForm.controls['userName'].errors?.['maxlength']" class="invalid-input">Name must be between 2 to 50 characters</small>
+                    }
+                </div>
+
+                <!-- date of birth -->
+                <div class="label-input-div">
+                    <label class="form-font">Date Of Birth</label>
+                    <input type="date" id="dob" formControlName="dobName" class="form-input"/>
+                    @if (signupForm.controls['dobName'].touched || signupForm.controls['dobName'].dirty) {
+                        <small *ngIf="signupForm.controls['dobName'].errors?.['required']" class="invalid-input">Date of Birth is required!</small>
+                        <small *ngIf="signupForm.controls['dobName'].errors?.['dateError']" class="invalid-input">{{ signupForm.controls['dobName'].errors?.['dateError'].message }}</small>
+                    }
+                </div>
+            </div>
+            <div class="label-input-div-container">
+
+                <!-- Email -->
+                <div class="label-input-div">
+                    <label class="form-font">Email</label>
+                    <input type="email" id="email" formControlName="emailName" class="form-input"/>
+                    @if (signupForm.controls['emailName'].touched || signupForm.controls['emailName'].dirty) {
+                        <small *ngIf="signupForm.controls['emailName'].errors?.['required']" class="invalid-input">Email is required!</small>
+                        <small *ngIf="signupForm.controls['emailName'].errors?.['pattern']" class="invalid-input">Email must follow a proper format</small>
+                    }
+                </div>
+
+                <!-- Phone Number -->
+                <div class="label-input-div">
+                    <label class="form-font">Contact Number</label>
+                    <input type="text" id="contact" formControlName="numberName" class="form-input"/>
+                    @if (signupForm.controls['numberName'].touched || signupForm.controls['numberName'].dirty) {
+                        <small *ngIf="signupForm.controls['numberName'].errors?.['required']" class="invalid-input">Contact number is required!</small>
+                        <small *ngIf="signupForm.controls['numberName'].errors?.['pattern']" class="invalid-input">Number can only contain 10 digits</small>
+                    }
+                </div>
+            </div>
+            <div class="label-input-div-container">
+
+                <!-- Password -->
+                <div class="label-input-div">
+                    <label class="form-font">Password</label>
+                    <input type="password" id="password" formControlName="passwordName" class="form-input"/>
+                    @if (signupForm.controls['passwordName'].touched || signupForm.controls['passwordName'].dirty) {
+                        <small *ngIf="signupForm.controls['passwordName'].errors?.['required']" class="invalid-input">Password is required!</small>
+                        <small *ngIf="signupForm.controls['passwordName'].errors?.['minlength'] || signupForm.controls['passwordName'].errors?.['maxlength']" class="invalid-input">The length of your password must be between 8 to 16 characters</small>
+                    }
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="label-input-div">
+                    <label class="form-font">Confirm Password</label>
+                    <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-input"/>
+                    @if (signupForm.controls['confirmPassword'].touched || signupForm.controls['confirmPassword'].dirty) {
+                        <small *ngIf="signupForm.controls['confirmPassword'].errors?.['required']" class="invalid-input">This field is required!</small>
+                        <small *ngIf="signupForm.hasError('passwordMismatch')" class="invalid-input">Passwords do not match</small>
+                    }
+                </div>
+            </div>
+            <div class="submit-button-container">
+                <button type="submit" class="submit-button" [disabled]="signupForm.invalid">Sign Up</button>
+            </div>
+            <p class="already-a-member">Already a Member? <a routerLink="/login" href="#">Log In</a></p>
+        </form>
+    </div>
+</div>

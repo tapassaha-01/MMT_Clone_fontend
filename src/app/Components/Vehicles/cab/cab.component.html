@@ -1,0 +1,42 @@
+<form [formGroup]="searchCabForm" (ngSubmit)="OnSearchTransport(searchCabForm)">
+    <div class="form-group">
+
+        <!-- From/Origin -->
+        <div class="box">From<br>
+            <input type="text" formControlName="origin"><br>
+            @if (searchCabForm.controls['origin'].touched || searchCabForm.controls['origin'].dirty) {
+                <small *ngIf="searchCabForm.controls['origin'].errors?.['required']">Provide a starting point</small>
+            }
+        </div>
+
+        <!-- To/destination -->
+        <div class="box">To<br>
+            <input type="text" formControlName="destination"><br>
+            @if (searchCabForm.controls['destination'].touched || searchCabForm.controls['destination'].dirty) {
+                <small *ngIf="searchCabForm.controls['destination'].errors?.['required']">Provide a destination</small>
+                <small *ngIf="searchCabForm.errors?.['depurtureError'] as error">{{ error.message }}</small>
+            }
+        </div>
+
+        <!-- DepartureDate -->
+        <div class="box">Departure Date<br>
+            <input type="date" formControlName="departureDate"><br>
+            @if (searchCabForm.controls['departureDate'].touched || searchCabForm.controls['departureDate'].dirty) {
+                <small *ngIf="searchCabForm.controls['departureDate'].errors?.['required']">Provide a Departure Date</small>
+                <small *ngIf="searchCabForm.controls['departureDate'].errors?.['dateError']">{{searchCabForm.controls['departureDate'].errors?.['dateError'].message}}</small>
+            }
+        </div>
+
+        <!-- Pickup time -->
+        <div class="box">Pickup Time<br>
+            <input type="time" formControlName="pickUpTime"><br>
+            @if (searchCabForm.controls['pickUpTime'].touched || searchCabForm.controls['pickUpTime'].dirty) {
+                <small *ngIf="searchCabForm.controls['pickUpTime'].errors?.['required']">Provide a pickup time</small>
+                <small *ngIf="searchCabForm.errors?.['timeInPast']">{{searchCabForm.errors?.['timeInPast'].message}}</small>
+            }
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="searchCabForm.invalid">Search</button>
+
+</form>

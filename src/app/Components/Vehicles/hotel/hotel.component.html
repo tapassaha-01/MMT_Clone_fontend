@@ -1,0 +1,36 @@
+<form [formGroup]="searchHotelForm" (ngSubmit)="OnSearchHotel(searchHotelForm)">
+    <div class="form-group">
+        <!-- Hotel City -->
+        <div class="box">City<br>
+            <input type="text" formControlName="city"><br>
+            @if (searchHotelForm.controls['city'].touched || searchHotelForm.controls['city'].dirty) {
+                <small *ngIf="searchHotelForm.controls['city'].errors?.['required']">Provide a city/hotel name</small><br>
+            }
+        </div>
+
+        <!-- Check in -->
+        <div class="box">Check-In<br>
+            <input type="date" formControlName="checkin"><br>
+            @if (searchHotelForm.controls['checkin'].touched || searchHotelForm.controls['checkin'].dirty) {
+                <small *ngIf="searchHotelForm.controls['checkin'].errors?.['required']">Provide a check-in date</small><br>
+                <small *ngIf="searchHotelForm.controls['checkin'].errors?.['dateError']">{{searchHotelForm.controls['checkin'].errors?.['dateError'].message}}</small>
+            }
+        </div>
+
+        <!-- Check out -->
+        <div class="box">Check Out<br>
+            <input type="date" formControlName="checkout"><br>
+            @if (searchHotelForm.controls['checkout'].touched || searchHotelForm.controls['checkout'].dirty) {
+                <small *ngIf="searchHotelForm.controls['checkout'].errors?.['required']">Provide a check-out date</small><br>
+                <small *ngIf="searchHotelForm.errors?.['returnDateError']">{{searchHotelForm.errors?.['returnDateError'].message}}</small>
+            }
+        </div>
+
+        <!-- Room and guests -->
+        <div class="box">Rooms and Guests<br>
+            <input type="number" min="1" formControlName="rooms" placeholder="No of rooms"><br>
+            <input type="number" min="1" formControlName="guests" placeholder="No of guests"><br>
+        </div>
+    </div>
+    <button type="submit" [disabled]="searchHotelForm.invalid">Search</button>
+</form>

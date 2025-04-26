@@ -1,0 +1,75 @@
+<app-customerbar></app-customerbar>
+<div class="container">
+    <div class="frame">
+        <h2 class="form-header">Make the Payment</h2>
+        <form [formGroup]="paymentForm" (ngSubmit)="OnPayment(paymentForm)">
+            <div class="label-input-div-container">
+                <!-- payerName -->
+                <div class="label-input-div">
+                    <label class="form-font">Payer Name</label>
+                    <input type="text" formControlName="payerName" class="form-input" readonly>
+                </div>
+                <!-- paymentAmount -->
+                <div class="label-input-div">
+                    <label class="form-font">Payment Amount</label>
+                    <input class="form-input" formControlName="paymentAmount" readonly>
+                    <!-- This filed will be provided by us -->
+                </div>
+            </div>
+            <div class="label-input-div-container">
+                <!-- paymenyMethod -->
+                <div class="label-input-div">
+                    <label class="form-font">Payment Method</label>
+                    <select formControlName="paymentMethod" class="form-input">
+                        <option value="null" selected disabled>-- Select --</option>
+                        <option value="upi">UPI</option>
+                        <option value="debit">Debit Card</option>
+                        <option value="credit">Credit Card</option>
+                    </select>
+                </div>
+                <!-- Collecting upi number -->
+                @if (paymentForm.value.paymentMethod=='upi') {
+                    <div class="label-input-div">
+                        <label class="form-font">UPI No</label>
+                        <input type="text" formControlName="upinumber" class="form-input">
+                        @if (paymentForm.controls['upinumber'].touched && paymentForm.controls['upinumber'].errors?.['required']) {
+                            <small class="invalid-input">Please provide the UPI number</small>
+                        }
+                    </div>
+                }
+            </div>
+            <!-- collecting card number/ exp through / cvv -->
+            @if (paymentForm.value.paymentMethod =='debit' || paymentForm.value.paymentMethod =='credit') 
+            {
+                <div class="label-input-div-container">
+                    <!-- Card Number -->
+                    <div class="label-input-div">
+                        <label class="form-font">Card Number</label>
+                        <input type="text" formControlName="upinumber" class="form-input">
+                        @if (paymentForm.controls['upinumber'].touched && paymentForm.controls['upinumber'].errors?.['required']) {
+                            <small class="invalid-input">Please provide the Card number</small>
+                        }
+                    </div>
+                    <!-- Exp through -->
+                    <div class="label-input-div">
+                        <label class="form-font">Exp through</label>
+                        <input type="month" formControlName="expThrough" class="form-input">
+                        @if (paymentForm.controls['expThrough'].touched && paymentForm.controls['expThrough'].errors?.['required']) {
+                            <small class="invalid-input">This field is necessary</small>
+                        }
+                    </div>
+                    <!-- CVV Number -->
+                    <div class="label-input-div">
+                        <label class="form-font">CVV</label>
+                        <input type="number" formControlName="cvvNumber" class="form-input">
+                        @if (paymentForm.controls['cvvNumber'].touched && paymentForm.controls['cvvNumber'].errors?.['required']) {
+                            <small class="invalid-input">This field is necessary</small>
+                        }
+                    </div>
+
+                </div>
+            }
+            <button type="submit" class="submit-button" [disabled]="paymentForm.invalid">Proceed</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<form [formGroup]="searchTrainForm" (ngSubmit)="OnSearchTransport(searchTrainForm)">
+    <div class="form-group">
+        <!-- From -->
+        <div class="box">From<br>
+            <input type="text" formControlName="departure"><br>
+            @if (searchTrainForm.controls['departure'].touched || searchTrainForm.value['departure'].dirty) {
+                <small *ngIf="searchTrainForm.controls['departure'].errors?.['required']">Departure is required</small>
+            }
+        </div>
+
+        <!-- to -->
+        <div class="box">To<br>
+            <input type="text" formControlName="destination">
+            @if (searchTrainForm.controls['destination'].touched || searchTrainForm.value['destination'].dirty) {
+                <small *ngIf="searchTrainForm.controls['destination'].errors?.['required']">Destination is required</small><br>
+                <small *ngIf="searchTrainForm.errors?.['depurtureError'] as error">{{ error.message }}</small>
+            }
+        </div>
+
+        <!-- traveldate -->
+        <div class="box">Departure Date<br>
+            <input type="date" formControlName="journeyDate"><br>
+            @if (searchTrainForm.controls['journeyDate'].touched || searchTrainForm.value['journeyDate'].dirty) {
+                <small *ngIf="searchTrainForm.controls['journeyDate'].errors?.['required']">Journey Date is required</small><br>
+                <small *ngIf="searchTrainForm.controls['journeyDate'].errors?.['dateError']">{{searchTrainForm.controls['journeyDate'].errors?.['dateError'].message}}</small>
+            }
+        </div>
+
+        <!-- class -->
+        <div class="box">Passengers and Class<br>
+            <input type="number" formControlName="numOfPassenger" placeholder="No of Passengers">
+            @if (searchTrainForm.controls['numOfPassenger'].touched || searchTrainForm.value['numOfPassenger'].dirty) {
+                <small *ngIf="searchTrainForm.controls['numOfPassenger'].errors?.['required']">Number of passengers is required</small>
+            }
+            <select formControlName="travelClass">
+                <!-- ngFor loop will be used to show all the classes -->
+                <option value="null" selected disabled>All Classes</option>
+                <option *ngFor="let item of bookingClass" [value]="item">{{item}} Class</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" [disabled]="searchTrainForm.invalid">Search</button>
+</form>

@@ -1,0 +1,11 @@
+<nav class="navbar">
+  <a href="#" class="logo">MyWebsite</a>
+  <div class="dropdown">
+    <button>Hello {{userName}}</button>
+    <div class="dropdown-content">
+      <a href="#" routerLink="/profile">Profile</a>
+      <a href="#">Settings</a>
+      <a href="#" (click)="OnLogout()">Logout</a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,108 @@
+.body-div {
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-family: 'Cursive';
+    font-size: 2em;
+    margin: 0;
+    color: white;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    width: 57%;
+    padding: 10px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    margin: auto;
+    position: relative;
+    top: 35px;
+    z-index: 10;
+}
+.nav div {
+    text-align: center;
+}
+
+.nav div.active {
+    background-color: transparent;
+    border-bottom: 3px solid #64a8f1e0;
+    /* box-shadow: inset 0 0 15px rgba(0, 123, 255, 0.4);
+    transition: box-shadow 0.4s ease, border-bottom 0.3s ease; */
+  }
+
+.nav div:hover {
+    cursor: pointer;
+}
+
+.main {
+    background: rgba(255, 255, 255, 0.638);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    width: 90%;                      /* prevent over-expansion */
+    max-width: 1200px;               /* you can adjust this based on your design */
+    box-sizing: border-box;          /* includes padding in width */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;                /* allow horizontal scroll if inner elements overflow */
+}
+
+
+.form-group {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+    margin: 5px;
+}
+
+.selection-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+}
+
+.radio-label {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+input, select{
+    border: 0px;
+    background-color: #b7b7b776;
+    border-radius: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset;
+}
+
+input:focus, select:focus {
+    outline: none;
+}

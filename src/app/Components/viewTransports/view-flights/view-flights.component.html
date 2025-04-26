@@ -1,0 +1,19 @@
+<app-customerbar></app-customerbar>
+<div class="main-container">
+    <div>
+        <h3>From {{departure}} to {{destination}}</h3>
+        <h6>Details for flights on {{journeyDate | date: 'shortDate'}}</h6>
+    </div>
+    <table>
+        <tbody>
+            <tr *ngFor="let item of flightDetails">
+                <th>{{item.travelCompanyName}}</th>
+                <th>{{item.departureTime | date:'shortTime'}}</th>
+                <th>{{item.totalTime}} hours journey</th>
+                <th>{{item.arrivalTime | date: 'shortTime'}}</th>
+                <th>{{item.price}}</th>
+                <th><button class="book-btn">Book</button></th>
+            </tr>
+        </tbody>
+    </table>
+</div>

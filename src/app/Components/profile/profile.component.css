@@ -1,0 +1,83 @@
+.main-container {
+    display: flex;
+    align-items: flex-start; /* Key change */
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.397);
+    gap: 20px;
+    border-radius: 20px;
+    padding: 20px;
+    flex-wrap: wrap; /* optional: allows responsiveness on smaller screens */
+  }
+  
+  .main-container p, h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 0;
+    margin: 0;
+  }
+  
+  .about-container {
+    flex: 1;
+    background-color: rgba(240, 248, 255, 0.56);
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 300px;
+  }
+  
+  .about-container h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .info-row {
+    margin-bottom: 15px;
+    font-size: 16px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #444;
+    min-width: 140px;
+  }
+  
+  .value {
+    color: #222;
+  }
+  
+  .update-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #009688;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+  }
+  
+  .update-button:hover {
+    background-color: #00796b;
+  }
+
+  .image-container {
+    background-color: rgba(240, 248, 255, 0.56);
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 200px;
+    text-align: center;
+  }
+  
+  .image-container img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+  }
+  

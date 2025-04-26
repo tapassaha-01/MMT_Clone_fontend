@@ -1,0 +1,22 @@
+<app-customerbar></app-customerbar>
+<div class="main-container">
+    <div class="about-container">
+      <h1>About</h1>
+      <div>
+        @if (userProfile!=null) {
+          <p>Username: {{userProfile.userName}}</p>
+          <p>Date of Birth: {{userProfile.dateOfBirth | date:'shortDate'}}</p>
+          <p>Email: {{userProfile.email}}</p>
+          <p>Contact Number: {{userProfile.phoneNumber}}</p>
+          <p>Password: {{userProfile.password}}</p>
+        }
+        <button class="update-button">Update Profile</button>
+      </div>
+    </div>
+    <div class="image-container">
+      <h1>Photo</h1>
+      <div>
+        <img [src]="profilePic" alt="Profile Photo">
+      </div>
+    </div>
+</div>

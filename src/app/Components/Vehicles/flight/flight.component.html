@@ -1,0 +1,73 @@
+<form [formGroup]="searchFlightForm" (ngSubmit)="OnSearchTransport(searchFlightForm)">
+    <div class="form-group">
+        <div class="box">From<br>
+
+            <!-- departure -->
+            <input type="text" formControlName="departure">
+            @if (searchFlightForm.controls['departure'].touched || searchFlightForm.controls['departure'].dirty) {
+                <small *ngIf="searchFlightForm.controls['departure'].errors?.['required']">Provide a departure</small>
+            }
+        </div>
+
+        <!-- destination -->
+        <div class="box">To<br>
+            <input type="text" formControlName="destination">
+            @if (searchFlightForm.controls['destination'].touched || searchFlightForm.controls['destination'].dirty) {
+                <small *ngIf="searchFlightForm.controls['destination'].errors?.['required']">Provide a departure</small><br>
+                <small *ngIf="searchFlightForm.errors?.['depurtureError']">{{searchFlightForm.errors?.['depurtureError'].message}}</small>
+            }
+        </div>
+
+        <!-- departure date -->
+        <div class="box">Departure Date<br>
+            <input type="date" formControlName="journeyDate">
+            <br>
+            @if (searchFlightForm.controls['journeyDate'].touched || searchFlightForm.controls['journeyDate'].dirty) {
+                <small *ngIf="searchFlightForm.controls['journeyDate'].errors?.['required']">Provide a departure</small><br>
+                <small *ngIf="searchFlightForm.controls['journeyDate'].errors?.['dateError']">{{searchFlightForm.controls['journeyDate'].errors?.['dateError'].message}}</small>
+            }
+        </div>
+
+        <!-- Return date -->
+        <div class="box">Return<br>
+            <small>Tap to add a return date ahead of time</small>
+            <input type="date" formControlName="returnDate">
+            <br>
+            @if (searchFlightForm.controls['returnDate'].touched || searchFlightForm.controls['returnDate'].dirty) {
+                <small *ngIf="searchFlightForm.controls['returnDate'].errors?.['required']">Provide a departure</small><br>
+                <small *ngIf="searchFlightForm.errors?.['returnDateError']">{{searchFlightForm.errors?.['returnDateError'].message}}</small>
+            }
+        </div>
+
+        <!-- number of passengers -->
+        <div class="box">Passengers and Class<br>
+            <input type="number" min="1" formControlName="numOfPassenger" placeholder="No of Passengers">
+            <select formControlName="travelClass">
+                <!-- ngFor loop will be used to show all the classes -->
+                <option value="null" selected disabled>Select</option>
+                <option *ngFor="let item of travelClass" [value]="item">{{item}}</option>
+            </select>
+        </div>
+    </div>
+    
+    
+    <div class="selection-container">
+        <div class="radio-label">
+            Select the type of fair
+        </div>
+        <label class="radio-label">
+            <input type="radio" formControlName="fare" value="regular" checked> Regular<br>Discount:
+        </label>
+        <label class="radio-label">
+            <input type="radio" formControlName="fare" value="student"> Student<br>Discount:
+        </label>
+        <label class="radio-label">
+            <input type="radio" formControlName="fare" value="premium"> Premium<br>Discount:
+        </label>
+        <label class="radio-label">
+            <input type="radio" formControlName="fare" value="senior"> Senior<br>Discount:
+        </label>
+    </div>
+
+    <button type="submit" [disabled]="searchFlightForm.invalid">Search</button>
+</form>

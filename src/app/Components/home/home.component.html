@@ -1,0 +1,31 @@
+@if (loginStatus) {
+    <app-customerbar></app-customerbar>
+}
+@else {
+    <app-commonbar></app-commonbar>
+}
+<div class="body-div">
+    <div class="header">
+        <h1>{{title}}</h1>
+    </div>
+    <div class="nav">
+        <!-- each img tag below will be connected to different services -->
+        <!-- <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png"> <p>Flights</p></div> -->
+
+        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="../../../../src/app/assets/flight.png"> <p>Flights</p></div>
+
+
+        <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')"><img src="assets/train.png"><p>Trains</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')"><img src="assets/hotels.png"> <p>Hotels</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')"><img src="assets/bus.jpg"><p>Buses</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'cab'}" (click)="OnTransportSelection('cab')"><img src="assets/taxi.png"><p>Cabs</p></div>
+    </div>
+    <!-- depending on the img div selected, the app-component will be loaded -->
+    <div class="main">
+        <app-flight *ngIf="selectedTransport === 'flight'"></app-flight>
+        <app-train *ngIf="selectedTransport === 'train'"></app-train>
+        <app-bus *ngIf="selectedTransport === 'bus'"></app-bus>
+        <app-hotel *ngIf="selectedTransport === 'hotel'"></app-hotel>
+        <app-cab *ngIf="selectedTransport === 'cab'"></app-cab>
+    </div>
+</div>

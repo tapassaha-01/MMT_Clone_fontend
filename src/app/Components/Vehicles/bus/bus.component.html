@@ -1,0 +1,33 @@
+<form [formGroup]="searchBusForm" (ngSubmit)="OnSearchBus(searchBusForm)">
+    <div class="form-group">
+
+        <!-- From/Origin -->
+        <div class="box">From<br>
+            <input type="text" formControlName="origin"><br>
+            @if (searchBusForm.controls['origin'].touched || searchBusForm.controls['origin'].dirty) {
+                <small *ngIf="searchBusForm.controls['origin'].errors?.['required']">Provide a starting point</small>
+            }
+        </div>
+
+        <!-- To/destination -->
+        <div class="box">To<br>
+            <input type="text" formControlName="destination"><br>
+            @if (searchBusForm.controls['destination'].touched || searchBusForm.controls['destination'].dirty) {
+                <small *ngIf="searchBusForm.controls['destination'].errors?.['required']">Provide a destination</small>
+                <small *ngIf="searchBusForm.errors?.['depurtureError'] as error">{{ error.message }}</small>
+            }
+        </div>
+
+        <!-- DepartureDate -->
+        <div class="box">Departure Date<br>
+            <input type="date" formControlName="departureDate"><br>
+            @if (searchBusForm.controls['departureDate'].touched || searchBusForm.controls['departureDate'].dirty) {
+                <small *ngIf="searchBusForm.controls['departureDate'].errors?.['required']">Provide a Departure Date</small>
+                <small *ngIf="searchBusForm.controls['departureDate'].errors?.['dateError']">{{searchBusForm.controls['departureDate'].errors?.['dateError'].message}}</small>
+            }
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="searchBusForm.invalid">Search</button>
+
+</form>
