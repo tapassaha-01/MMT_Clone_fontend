@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -8,26 +8,48 @@ import { IUser } from '../Interface/IUser';
   providedIn: 'root'
 })
 export class UserService {
+ 
+
+  baseUrl:string = "http://localhost:9090/MMT/"
 
   constructor(private http: HttpClient) { }
 
 
+
+
   // 01 - METHOD TO LOGIN USER
-  UserLogin(email: string, password: string): Observable<boolean>{
-    return this.http.get<boolean>('').pipe(catchError(this.errorHandler));
+  UserLogin(email: string, password: string): Observable<string> {
+    const params = new HttpParams()
+      .set('userName', email)
+      .set('password', password);
+  
+    return this.http.post(this.baseUrl + 'login', null, { params, responseType: 'text' }).pipe(
+      catchError(this.errorHandler)
+    );
   }
+    
+  
 
 
   // 02 - METHOD FOR USER SIGN UP/REGISTRATION
-  UserSignup(form: FormGroup): Observable<boolean>{
+  UserSignup(form: FormGroup): Observable<string>{
     var tempObj: IUser={
       userName: form.value.userName,
-      dateOfBirth: form.value.dobName,
       email: form.value.emailName,
-      phoneNumber: form.value.numberName,
-      password: form.value.passwordName
-    } ;
-    return this.http.post<boolean>('', tempObj).pipe(catchError(this.errorHandler));
+      phoneNo: form.value.numberName,
+      password: form.value.passwordName,
+      admin:false
+    };
+    return this.http.post<string>(this.baseUrl+"generateOtp", tempObj).pipe(catchError(this.errorHandler));
+  }
+
+  verifyOTP(otp: string, email: string): Observable<any>{
+    const otpObj = {
+      emailId: email,
+      otp: otp
+    };
+    console.log(otpObj);
+    return this.http.post<any>(this.baseUrl+"register", otpObj).pipe(catchError(this.errorHandler));
   }
 
   // 03 - AFTER LOGIN=> METHOD TO SHOW USER PROFILE BASED ON USER-EMAIL
