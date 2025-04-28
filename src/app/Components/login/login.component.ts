@@ -22,26 +22,27 @@ export class LoginComponent implements OnInit {
 
   onUserLogin(_form: NgForm){
     
-    sessionStorage.setItem('email', _form.value.emailName);
-    alert("login success")
-    this._router.navigate(['/homeview']);
+    // sessionStorage.setItem('email', _form.value.emailName);
+    // alert("login success")
+    // this._router.navigate(['/homeview']);
     
-    // this._service.UserLogin(_form.value.emailName, _form.value.passwordName).subscribe(
-    //   success=>{
-    //     if(success){
-    //       sessionStorage.setItem('email', _form.value.emailName);
-
-    //       alert("Login Successful");
-    //       this._router.navigate(['/homeview']);
-    //     }
-    //   },
-    //   error=>{
-    //     this.errorMsg=error;
-    //     alert("Some error occured");
-    //   },
-    //   ()=>{
-    //     console.log("User login Successful")
-    //   }
-    // );
+    this._service.UserLogin(_form.value.UserName, _form.value.passwordName).subscribe(
+      success=>{
+        if(success){
+          // sessionStorage.setItem('email', _form.value.emailName);
+          console.log(success);
+          sessionStorage.setItem('jwtToken', success);
+          this._router.navigate(['/homeview']);
+        }
+      },
+      error=>{
+        this.errorMsg=error;
+        alert("please enter valid credentials");
+        this._router.navigate(['/login']);
+      },
+      ()=>{
+        console.log("User login Successful")
+      }
+    );
   }
 }
