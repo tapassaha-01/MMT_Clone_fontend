@@ -30,8 +30,10 @@ export class LoginComponent implements OnInit {
       success=>{
         if(success){
           // sessionStorage.setItem('email', _form.value.emailName);
+          const successMap = new Map<string, string>(Object.entries(success));
           console.log(success);
-          sessionStorage.setItem('jwtToken', success);
+          localStorage.setItem("jwtToken", successMap.get('jwtToken') || '');
+          localStorage.setItem("user", successMap.get('user') || '');
           this._router.navigate(['/homeview']);
         }
       },

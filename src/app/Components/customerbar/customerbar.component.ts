@@ -14,14 +14,16 @@ export class CustomerbarComponent implements OnInit{
   constructor(private router: Router){}
 
   ngOnInit(): void {
-      this.userName = <string>sessionStorage.getItem('email')?.split("@",1)[0];
+      // this.userName = 
+      var user = JSON.parse(localStorage.getItem('user') || '{}');
+      this.userName = user.userName || ''; 
   }
 
   OnLogout(): void {
     const confirmLogout = window.confirm('Are you sure you want to logout?');
     if (confirmLogout) {
       // Perform your logout logic here (e.g., clearing tokens, calling logout API)
-      sessionStorage.clear();
+      localStorage.clear();
 
       // Then redirect to home
       this.router.navigate(['/home']);
