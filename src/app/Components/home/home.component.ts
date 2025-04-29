@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const temp = sessionStorage.getItem('email');
+      const temp = localStorage.getItem('jwtToken');
       if (temp != null) {
         this.loginStatus = true;
       }

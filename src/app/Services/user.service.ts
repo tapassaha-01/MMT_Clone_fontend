@@ -18,12 +18,12 @@ export class UserService {
 
 
   // 01 - METHOD TO LOGIN USER
-  UserLogin(email: string, password: string): Observable<string> {
+  UserLogin(email: string, password: string): Observable<Map<string,string> >{
     const params = new HttpParams()
       .set('userName', email)
       .set('password', password);
   
-    return this.http.post(this.baseUrl + 'login', null, { params, responseType: 'text' }).pipe(
+    return this.http.post<Map<string,string>>(this.baseUrl + 'login', null, { params, responseType: 'json' }).pipe(
       catchError(this.errorHandler)
     );
   }

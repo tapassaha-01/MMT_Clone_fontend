@@ -31,5 +31,5 @@ export const routes: Routes = [
     
     {path: 'viewFlight/: departure/: destination/: journeyDate', component: ViewFlightsComponent},
     {path: 'viewTrain', component: ViewTrainsComponent},
-    {path: '**', component: HomeComponent}
+    // {path: '**', component: HomeComponent}
 ];

@@ -12,9 +12,9 @@
         <!-- each img tag below will be connected to different services -->
         <!-- <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png"> <p>Flights</p></div> -->
 
-        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="../../../../src/app/assets/flight.png"> <p>Flights</p></div>
-
-
+        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')">
+            <img src="../../../assets/flight.png" alt="flight" ><p>Flights</p></div>
+ 
         <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')"><img src="assets/train.png"><p>Trains</p></div>
         <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')"><img src="assets/hotels.png"> <p>Hotels</p></div>
         <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')"><img src="assets/bus.jpg"><p>Buses</p></div>
