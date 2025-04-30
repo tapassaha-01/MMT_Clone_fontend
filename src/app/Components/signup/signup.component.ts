@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
       passwordName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
     }, { validators: checkPassword() });
+    
     this.otpForm = this.formBuilder.group({
       otp1: new FormControl(''),
       otp2: new FormControl(''),
@@ -50,7 +51,7 @@ export class SignupComponent implements OnInit {
           alert("User signup successful");
 
           console.log("OTP : ",success)
-          // this.router.navigate(['/login']);//
+          // this.router.navigate(['/login']);
 
           console.log(success);
           this.showOtpForm = true;
@@ -64,6 +65,7 @@ export class SignupComponent implements OnInit {
       }
     )
   }
+
 getOtpValue(): string {
   const otp = Object.values(this.otpForm.value).join('');
   this._service.verifyOTP(otp,this.signupForm.value.emailName).subscribe(
@@ -99,15 +101,15 @@ move(event: any, nextInput: any) {
 
 export function checkPassword(): ValidatorFn{
 
-return (group: AbstractControl): ValidationErrors | null => {
-  const password = group.get('passwordName');
-  const confirmPassword = group.get('confirmPassword');
+  return (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('passwordName');
+    const confirmPassword = group.get('confirmPassword');
 
-  if(password && confirmPassword && password.value !== confirmPassword.value){
-      return {passwordMismatch: true};
-    }
-  
-    return null;
+    if(password && confirmPassword && password.value !== confirmPassword.value){
+        return {passwordMismatch: true};
+      }
+    
+      return null;
   }
 }
 
