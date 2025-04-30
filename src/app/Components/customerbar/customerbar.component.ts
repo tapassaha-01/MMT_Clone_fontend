@@ -21,7 +21,7 @@ export class CustomerbarComponent implements OnInit{
     const confirmLogout = window.confirm('Are you sure you want to logout?');
     if (confirmLogout) {
       // Perform your logout logic here (e.g., clearing tokens, calling logout API)
-      sessionStorage.clear();
+      localStorage.clear();
 
       // Then redirect to home
       this.router.navigate(['/home']);

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, Observable, throwError } from 'rxjs';
 import { IUser } from '../Interface/IUser';
+import { UserEntity } from '../Interface/UserEntity';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,18 @@ export class UserService {
       phoneNumber: form.value.numberName,
       password: form.value.passwordName
     } ;
-    return this.http.post<boolean>('', tempObj).pipe(catchError(this.errorHandler));
+    return this.http.post<boolean>('http://localhost:9090/MMT/register', tempObj).pipe(catchError(this.errorHandler));
+  }
+
+  generateOtp():Observable<string>{
+var tempObj: UserEntity={
+  userName:"Debu",
+  email: "rdebjytoti@gmail.com",
+  phoneNo: 12345234534,
+  password: "admin12",
+  admin: false
+};
+  return this.http.post<string>('http://localhost:9090/MMT/generateOtp', tempObj).pipe(catchError(this.errorHandler));
   }
 
   // 03 - AFTER LOGIN=> METHOD TO SHOW USER PROFILE BASED ON USER-EMAIL
