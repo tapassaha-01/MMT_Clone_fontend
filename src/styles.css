@@ -3,7 +3,12 @@
 html, body { 
     height: 100%;
     margin: 20px;
+
+    /* background-image: url('./app/Assets/background.jpg'); */
+    background-color: bisque;
+
     background-image: url('./assets/background.jpg');
+
     background-size: cover; 
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

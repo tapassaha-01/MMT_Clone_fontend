@@ -22,9 +22,15 @@ export class LoginComponent implements OnInit {
 
   onUserLogin(_form: NgForm){
     
+
+    //localStorage.setItem('email', _form.value.emailName);
+    //alert("login success")
+    //this._router.navigate(['/homeview']);
+
     // sessionStorage.setItem('email', _form.value.emailName);
     // alert("login success")
     // this._router.navigate(['/homeview']);
+
     
     this._service.UserLogin(_form.value.UserName, _form.value.passwordName).subscribe(
       success=>{

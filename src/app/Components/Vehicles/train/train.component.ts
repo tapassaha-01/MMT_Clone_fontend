@@ -53,7 +53,7 @@ export function CheckDestination(control: AbstractControl): ValidationErrors | n
   const destination = control.get('destination')?.value;
   const departure = control.get('departure')?.value;
 
-  if(destination.toLowerCase()===departure.toLowerCase()){
+  if(destination && departure && destination.toLowerCase()===departure.toLowerCase()){
     return{
       depurtureError:{
         message: "Departure and destination can't be same"

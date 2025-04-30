@@ -44,13 +44,18 @@ export class SignupComponent implements OnInit {
   }
 
   OnSubmitForm(form: FormGroup){
-    this._service.UserSignup(form).subscribe(
+    this._service.generateOtp().subscribe(
       success=>{
         if(success){
           alert("User signup successful");
+
+          console.log("OTP : ",success)
+          // this.router.navigate(['/login']);//
+
           console.log(success);
           this.showOtpForm = true;
           // this.router.navigate(['/login']);
+
         }
       },
       error=>{
