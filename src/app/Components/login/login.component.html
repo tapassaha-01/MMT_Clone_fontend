@@ -6,7 +6,7 @@
             <div class="label-input-div-container">
                 <div class="label-input-div">
                     <label class="form-font" for="email">UserName</label>
-                    <input type="text" id="email" name="UserName" class="form-input" required ngModel #emailRef="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"/>
+                    <input type="text" id="email" name="UserName" class="form-input" required ngModel #emailRef="ngModel" />
                 </div>
                 <div class="invalid-input">
                     @if(emailRef.errors?.['required'] && emailRef.touched){
@@ -19,7 +19,7 @@
                 </div>
                 <div class="label-input-div">
                     <label class="form-font" for="password">Password</label>
-                    <input type="text" id="password" name="passwordName" class="form-input"  required ngModel #passwordRef="ngModel"/>
+                    <input type="password" id="password" name="passwordName" class="form-input"  required ngModel #passwordRef="ngModel"/>
                 </div>
                 <div class="invalid-input">
                     @if (passwordRef?.errors?.['required'] && (passwordRef?.touched || passwordRef?.dirty)) {

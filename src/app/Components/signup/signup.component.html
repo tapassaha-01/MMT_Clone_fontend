@@ -17,14 +17,7 @@
                 </div>
 
                 <!-- date of birth -->
-                <div class="label-input-div">
-                    <label class="form-font">Date Of Birth</label>
-                    <input type="date" id="dob" formControlName="dobName" class="form-input"/>
-                    @if (signupForm.controls['dobName'].touched || signupForm.controls['dobName'].dirty) {
-                        <small *ngIf="signupForm.controls['dobName'].errors?.['required']" class="invalid-input">Date of Birth is required!</small>
-                        <small *ngIf="signupForm.controls['dobName'].errors?.['dateError']" class="invalid-input">{{ signupForm.controls['dobName'].errors?.['dateError'].message }}</small>
-                    }
-                </div>
+                
             </div>
             <div class="label-input-div-container">
 
@@ -41,10 +34,10 @@
                 <!-- Phone Number -->
                 <div class="label-input-div">
                     <label class="form-font">Contact Number</label>
-                    <input type="text" id="contact" formControlName="numberName" class="form-input"/>
-                    @if (signupForm.controls['numberName'].touched || signupForm.controls['numberName'].dirty) {
-                        <small *ngIf="signupForm.controls['numberName'].errors?.['required']" class="invalid-input">Contact number is required!</small>
-                        <small *ngIf="signupForm.controls['numberName'].errors?.['pattern']" class="invalid-input">Number can only contain 10 digits</small>
+                    <input type="text" id="contact" formControlName="phoneNo" class="form-input"/>
+                    @if (signupForm.controls['phoneNo'].touched || signupForm.controls['phoneNo'].dirty) {
+                        <small *ngIf="signupForm.controls['phoneNo'].errors?.['required']" class="invalid-input">Contact number is required!</small>
+                        <small *ngIf="signupForm.controls['phoneNo'].errors?.['pattern']" class="invalid-input">Number can only contain 10 digits</small>
                     }
                 </div>
             </div>

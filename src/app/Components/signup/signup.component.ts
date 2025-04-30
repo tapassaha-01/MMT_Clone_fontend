@@ -27,9 +27,9 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      dobName: ['', [Validators.required, checkDOB]],
+      
       emailName: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
-      numberName: ['', [Validators.required, Validators.pattern(this.numberRegx)]],
+      phoneNo: ['', [Validators.required, Validators.pattern(this.numberRegx)]],
       passwordName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
     }, { validators: checkPassword() });
@@ -44,13 +44,13 @@ export class SignupComponent implements OnInit {
   }
 
   OnSubmitForm(form: FormGroup){
-    this._service.generateOtp().subscribe(
+    this._service.generateOtp(form).subscribe(
       success=>{
         if(success){
           alert("User signup successful");
 
           console.log("OTP : ",success)
-          // this.router.navigate(['/login']);//
+          // this.router.navigate(['/login']);
 
           console.log(success);
           this.showOtpForm = true;
