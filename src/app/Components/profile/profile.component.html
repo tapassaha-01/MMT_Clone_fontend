@@ -5,9 +5,9 @@
       <div>
         @if (userProfile!=null) {
           <p>Username: {{userProfile.userName}}</p>
-          <p>Date of Birth: {{userProfile.dateOfBirth | date:'shortDate'}}</p>
+          <!-- <p>Date of Birth: {{userProfile.dateOfBirth | date:'shortDate'}}</p> -->
           <p>Email: {{userProfile.email}}</p>
-          <p>Contact Number: {{userProfile.phoneNumber}}</p>
+          <p>Contact Number: {{userProfile.phoneNo}}</p>
           <p>Password: {{userProfile.password}}</p>
         }
         <button class="update-button">Update Profile</button>

@@ -24,9 +24,9 @@ export class ProfileComponent implements OnInit {
     this.userProfile = {
       email: "debjyoti@gmail.com",
       userName: "Debjyoti",
-      dateOfBirth: new Date(1,1,2000),
-      phoneNumber: 9732021932,
-      password: "Debu@1800"
+      phoneNo: 9732021932,
+      password: "Debu@1800",
+      admin:false
     }
   
 

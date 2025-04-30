@@ -1,7 +1,7 @@
 export interface IUser{
     userName:string,
-    dateOfBirth: Date,
     email: string,
-    phoneNumber: number,
+    phoneNo: number,
     password: string,
+    admin:boolean
 }

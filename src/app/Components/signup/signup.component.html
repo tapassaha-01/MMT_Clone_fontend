@@ -1,8 +1,9 @@
 <app-commonbar></app-commonbar>
 <div class="signup-container">
     <div class="signup-frame">
+        @if (!showOtpForm) {
         <h2 class="form-header">Signup</h2>
-        <form [formGroup]="signupForm" (ngSubmit)="OnSubmitForm(signupForm)">
+        <form [formGroup]="signupForm" (ngSubmit)="OnSubmitForm(signupForm)" >
             <div class="label-input-div-container">
 
                 <!-- userName -->
@@ -73,6 +74,29 @@
                 <button type="submit" class="submit-button" >Sign Up</button>
             </div>
             <p class="already-a-member">Already a Member? <a routerLink="/login" href="#">Log In</a></p>
-        </form>
+        </form>}
+        @if (showOtpForm) {
+        <h2 class="form-header">Enter OTP</h2>
+        <form [formGroup]="otpForm" (ngSubmit)="getOtpValue()">
+            <div class="d-flex gap-2 justify-content-center">
+              <input type="text" formControlName="otp1" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp2)" #otp1 />
+              <input type="text" formControlName="otp2" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp3)" #otp2 />
+              <input type="text" formControlName="otp3" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp4)" #otp3 />
+              <input type="text" formControlName="otp4" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp5)" #otp4 />
+              <input type="text" formControlName="otp5" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp6)" #otp5 />
+              <input type="text" formControlName="otp6" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, null)" #otp6 />
+            </div>
+          
+            <div class="text-center mt-3">
+              <button class="btn btn-primary" type="submit">Submit OTP</button>
+            </div>
+          </form>
+        }
     </div>
 </div>

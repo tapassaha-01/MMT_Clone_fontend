@@ -18,6 +18,9 @@ export class SignupComponent implements OnInit {
   emailRegx="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
   numberRegx= "^[0-9]{10}$"
   signupForm!: FormGroup;
+  otpForm!: FormGroup;
+  showOtpForm: boolean = false;
+  
 
   constructor(private formBuilder: FormBuilder, private _service: UserService, private router: Router){}
 
@@ -30,7 +33,14 @@ export class SignupComponent implements OnInit {
       passwordName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
     }, { validators: checkPassword() });
-    
+    this.otpForm = this.formBuilder.group({
+      otp1: new FormControl(''),
+      otp2: new FormControl(''),
+      otp3: new FormControl(''),
+      otp4: new FormControl(''),
+      otp5: new FormControl(''),
+      otp6: new FormControl(''),
+    });
   }
 
   OnSubmitForm(form: FormGroup){
@@ -38,8 +48,14 @@ export class SignupComponent implements OnInit {
       success=>{
         if(success){
           alert("User signup successful");
+
           console.log("OTP : ",success)
           // this.router.navigate(['/login']);//
+
+          console.log(success);
+          this.showOtpForm = true;
+          // this.router.navigate(['/login']);
+
         }
       },
       error=>{
@@ -48,8 +64,34 @@ export class SignupComponent implements OnInit {
       }
     )
   }
-
+getOtpValue(): string {
+  const otp = Object.values(this.otpForm.value).join('');
+  this._service.verifyOTP(otp,this.signupForm.value.emailName).subscribe(
+    success => {
+      if (success) {
+        alert('OTP verified successfully');
+        console.log('OTP verification success:', success);
+        this.router.navigate(['/login']);
+        // this.router.navigate(['/dashboard']);
+      }
+    },
+    error => {
+      alert('OTP verification failed');
+      this.router.navigate(['/signup']);
+      console.error('OTP verification error:', error);
+    }
+  );
+  console.log('OTP is:', otp);
+  return otp;
 }
+
+move(event: any, nextInput: any) {
+  if (event.target.value.length === 1 && nextInput) {
+    nextInput.focus();
+  }
+}
+}
+
 
 
 

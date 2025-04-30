@@ -22,26 +22,35 @@ export class LoginComponent implements OnInit {
 
   onUserLogin(_form: NgForm){
     
-    localStorage.setItem('email', _form.value.emailName);
-    alert("login success")
-    this._router.navigate(['/homeview']);
-    
-    // this._service.UserLogin(_form.value.emailName, _form.value.passwordName).subscribe(
-    //   success=>{
-    //     if(success){
-    //       sessionStorage.setItem('email', _form.value.emailName);
 
-    //       alert("Login Successful");
-    //       this._router.navigate(['/homeview']);
-    //     }
-    //   },
-    //   error=>{
-    //     this.errorMsg=error;
-    //     alert("Some error occured");
-    //   },
-    //   ()=>{
-    //     console.log("User login Successful")
-    //   }
-    // );
+    //localStorage.setItem('email', _form.value.emailName);
+    //alert("login success")
+    //this._router.navigate(['/homeview']);
+
+    // sessionStorage.setItem('email', _form.value.emailName);
+    // alert("login success")
+    // this._router.navigate(['/homeview']);
+
+    
+    this._service.UserLogin(_form.value.UserName, _form.value.passwordName).subscribe(
+      success=>{
+        if(success){
+          // sessionStorage.setItem('email', _form.value.emailName);
+          const successMap = new Map<string, string>(Object.entries(success));
+          console.log(success);
+          localStorage.setItem("jwtToken", successMap.get('jwtToken') || '');
+          localStorage.setItem("user", successMap.get('user') || '');
+          this._router.navigate(['/homeview']);
+        }
+      },
+      error=>{
+        this.errorMsg=error;
+        alert("please enter valid credentials");
+        this._router.navigate(['/login']);
+      },
+      ()=>{
+        console.log("User login Successful")
+      }
+    );
   }
 }
