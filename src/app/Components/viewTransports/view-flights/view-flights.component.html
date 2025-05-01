@@ -8,11 +8,11 @@
         <tbody>
             <tr *ngFor="let item of flightDetails">
                 <th>{{item.travelCompanyName}}</th>
-                <th>{{item.departureTime | date:'shortTime'}}</th>
+                <th>{{item.departureDate}}</th>
                 <th>{{item.totalTime}} hours journey</th>
-                <th>{{item.arrivalTime | date: 'shortTime'}}</th>
+                <th>{{item.arrivalDate}}</th>
                 <th>{{item.price}}</th>
-                <th><button class="book-btn">Book</button></th>
+                <th><button class="book-btn" (click)="onBookFlight(item)">Book</button></th>
             </tr>
         </tbody>
     </table>

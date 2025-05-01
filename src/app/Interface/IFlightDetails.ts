@@ -1,7 +1,7 @@
 export interface IFlightDetails{
     travelCompanyName: string,
-    departureTime: Date,
-    arrivalTime: Date,
+    departureDate: Date,
+    arrivalDate: Date,
     totalTime: number,
     price: number;
 }

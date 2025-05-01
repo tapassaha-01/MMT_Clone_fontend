@@ -1,0 +1,135 @@
+<app-customerbar></app-customerbar>
+<div class="signup-container">
+    <div class="signup-frame">
+        <h2 class="form-header">Booking Details</h2>
+        <form [formGroup]="bookingForm" (ngSubmit)="OnBooking(bookingForm)">
+
+            <!-- FLIGHT DETAILS THAT WILL BE FETCHED FROM SESSION STORAGE -->
+            <h3>Flight Details</h3>
+            <div class="label-input-div-container">
+                <!-- startFrom/departure -->
+                <div class="label-input-div">
+                    <label class="form-font">Departure</label>
+                    <input type="text" formControlName="startFrom" class="form-input" readonly>
+                </div>
+
+                <!-- endTo/destination -->
+                <div class="label-input-div">
+                    <label class="form-font">Destination</label>
+                    <input type="text" formControlName="endTo" class="form-input" readonly>                    
+                </div>
+            </div>
+            
+
+            <div class="label-input-div-container">
+                <!-- starting date -->
+                <div class="label-input-div">
+                    <label class="form-font">Boarding Date</label>
+                    <input type="date" formControlName="startDate" class="form-input" readonly>
+                </div>
+
+                <!-- ending date -->
+                <div class="label-input-div">
+                    <label class="form-font">Reaching Destination on</label>
+                    <input type="date" formControlName="endDate" class="form-input" readonly>
+                </div>
+            </div>
+
+            <div class="label-input-div-container">
+                <!-- passengerNumber -->
+                <div class="label-input-div">
+                    <label class="form-font">Number of passengers</label>
+                    <input type="number" formControlName="passengerNum" class="form-input" min="1" (input)="onNumberOfPassengersChange(bookingForm.get('passengerNum')?.value)">
+                    @if (bookingForm.controls['passengerNum'].touched || bookingForm.controls['passengerNum'].dirty) {
+                        <small *ngIf="bookingForm.controls['passengerNum'].errors?.['required']" class="invalid-input">Please provide the number of passengers!</small>
+                    }
+                </div>
+            </div>
+            <hr />
+
+            <!-- PASSENGER DETAILS -->
+            <div formArrayName="passengers">
+                <div *ngFor="let passenger of passengers.controls; let i = index" [formGroupName]="i">
+                  <h4>Passenger {{ i + 1 }}</h4>
+                  <div class="label-input-div-container">
+                    <div class="label-input-div">
+                        <!-- Passenger name -->
+                        <label>Name:</label>
+                        <input type="text" formControlName="name" class="form-input"/>
+                        <div *ngIf="passenger.get('name')?.invalid && passenger.get('name')?.touched" class="error">
+                            Name is required.
+                        </div>
+                      </div>
+    
+                      <div class="label-input-div">
+                        <!-- Phone Number -->
+                        <label>Phone No:</label>
+                        <input type="number" formControlName="phoneNo" class="form-input">
+                        <div *ngIf="passenger.get('phoneNo')?.invalid && passenger.get('phoneNo')?.touched" class="error">
+                                Phone number is required
+                        </div>
+                      </div>
+                  </div>
+                  <div class="label-input-div-container">
+                    <div class="label-input-div">
+                        <!-- Addhar Card -->
+                        <label>Addhar Card:</label>
+                        <input type="number" formControlName="addharNo" class="form-input">
+                        <div *ngIf="passenger.get('addharNo')?.invalid && passenger.get('addharNo')?.touched" class="error">
+                            Addhar number is required
+                        </div>
+                      </div>
+    
+                      <div class="label-input-div">
+                        <!-- Age -->
+                        <label>Age:</label>
+                        <input type="number" formControlName="age" class="form-input"/>
+                        <div *ngIf="passenger.get('age')?.invalid && passenger.get('age')?.touched" class="error">
+                            Age is required and must be 0 or above.
+                        </div>
+                      </div>
+                  </div>
+                  <div class="label-input-div-container">
+                    <div class="label-input-div">
+                        <!-- BirthDate -->
+                        <label>Birthdate:</label>
+                        <input type="date" formControlName="birthdate" class="form-input"/>
+                        <div *ngIf="passenger.get('birthdate')?.invalid && passenger.get('birthdate')?.touched" class="error">
+                            Birthdate is required
+                        </div>
+                      </div>
+    
+                      <div class="label-input-div">
+                        <!-- Gender -->
+                        <label>Gender:</label>
+                        <select formControlName="gender">
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div *ngIf="passenger.get('gender')?.invalid && passenger.get('gender')?.touched" class="error">
+                            Gender is required.
+                        </div>
+                      </div>
+                  </div>
+                  <div class="label-input-div-container">
+                    <div class="label-input-div">
+                        <!-- nationality -->
+                        <label>Nationality:</label>
+                        <input type="text" formControlName="nationality" class="form-input"/>
+                        <div *ngIf="passenger.get('nationality')?.invalid && passenger.get('nationality')?.touched" class="error">
+                            Nationality is required.
+                        </div>
+                      </div>
+                  </div>
+                  <hr />
+                </div>
+              </div>
+
+            <div class="submit-button-container">
+                <button type="submit" class="submit-button" [disabled]="bookingForm.invalid">Submit Details</button>
+            </div>           
+        </form>
+    </div>
+</div>

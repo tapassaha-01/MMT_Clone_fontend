@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IFlightDetails } from '../../../Interface/IFlightDetails';
+import { ITravelDetails } from '../../../Interface/ITravelDetails';
 
 
 @Component({
@@ -15,12 +15,18 @@ export class FlightComponent implements OnInit {
 
   searchFlightForm!: FormGroup;
   travelClass: string[] = ['Business', 'First Class', 'Economy', 'Premium Economy'];
+  allDetails: ITravelDetails={
+    startFrom: '',
+    endTo: '',
+    startingDate: new Date(),
+    endingDate: new Date(),
+    passengerNum: 0,
+    bookingClass: '',
+    passengers: []
+  }
 
-  constructor(private formBuilder: FormBuilder, private route: Router){}
+  constructor(private formBuilder: FormBuilder, private route: Router){
 
-  // The abstractControlOptions was used due to .group being deprecated for the custom validaations being defined in a new array. Thus they are passed as AbstractControlOptions
-
-  ngOnInit(): void {
       this.searchFlightForm = this.formBuilder.group({
         departure: ['', [Validators.required]],
         destination: ['', [Validators.required]],
@@ -30,18 +36,29 @@ export class FlightComponent implements OnInit {
         travelClass: ['', [Validators.required]],
         fare: ['', [Validators.required]]
       },
-    {
-      validators: [CheckReturnDate, CheckDestination]
-    } as AbstractControlOptions
-  );
+      {
+        validators: [CheckReturnDate, CheckDestination]
+      } as AbstractControlOptions
+    );
+  } 
+
+  ngOnInit(): void {
   }
 
 
-
+// these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
   OnSearchTransport(_form: FormGroup){
-    console.log(_form.value.departure, _form.value.destination, _form.value.journeyDate, _form.value.returnDate, _form.value.numOfPassenger, _form.value.fare, _form.value.travelClass);
-    
-    this.route.navigate(['/viewFlight', _form.value.departure, _form.value.destination, _form.value.journeyDate]);
+    // Store the necessary data into the object created above and storing it in session storage
+    this.allDetails.startFrom = _form.value.departure;
+    this.allDetails.endTo = _form.value.destination;
+    this.allDetails.startingDate = _form.value.journeyDate;
+    this.allDetails.endingDate = _form.value.returnDate;
+    this.allDetails.passengerNum = _form.value.numOfPassenger;
+    this.allDetails.bookingClass = _form.value.travelClass;
+    this.allDetails.passengers = [];
+    sessionStorage.setItem('allDetails', JSON.stringify(this.allDetails));
+
+    this.route.navigate(['/viewFlight']);
   }
 
 }

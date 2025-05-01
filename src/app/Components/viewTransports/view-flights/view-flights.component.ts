@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { IFlightDetails } from '../../../Interface/IFlightDetails';
 import { CommonModule, NgFor } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { CustomerbarComponent } from "../../customerbar/customerbar.component";
 
 @Component({
@@ -12,38 +12,58 @@ import { CustomerbarComponent } from "../../customerbar/customerbar.component";
 })
 export class ViewFlightsComponent implements OnInit {
 
-  flightDetails: IFlightDetails[]=[];
-  private activatedRoute = inject(ActivatedRoute);
+  private route = inject(Router);
+  allDetailsObj: any;
 
-  // departure: string = "Delhi";
-  // destination: string = "Kolkata";
-  // journeyDate: Date = new Date(2025, 4, 18);
-
-  departure: string = this.activatedRoute.snapshot.params['departure'];
-  destination: string = this.activatedRoute.snapshot.params['destination'];
-  journeyDate: Date = this.activatedRoute.snapshot.params['journeyDate'];
+  departure: string = "";
+  destination: string = "";
+  journeyDate: Date = new Date();
 
     flight1: IFlightDetails ={
       travelCompanyName: 'AirIndia',
-      departureTime: new Date(2025, 4, 18, 10, 15),
+      departureDate: new Date(2025, 5, 10, 10, 15),
       totalTime: 2.5,
-      arrivalTime: new Date(2025, 4, 18, 13, 15),
+      arrivalDate: new Date(2025, 5, 11, 13, 15),
       price: 25000
     }
   
     flight2: IFlightDetails ={
       travelCompanyName: 'JetAirways',
-      departureTime: new Date(2025, 4, 18, 16, 15),
+      departureDate: new Date(2025, 7, 18, 16, 15),
       totalTime: 4.5,
-      arrivalTime: new Date(2025, 4, 18, 20, 15),
+      arrivalDate: new Date(2025, 7, 19, 20, 15),
       price: 30000
     }
   
+    flightDetails = [this.flight1, this.flight2];
+
+    // have to change this drastically as i need get method for the flight details 
+    // have to add sessionstorage.getitem and then parse it to get the object and then use it in the constructor
     constructor(){
-      this.flightDetails = [this.flight1, this.flight2];
+      
     }
   
     ngOnInit(): void {
-        
+      var allDetails = sessionStorage.getItem('allDetails');
+      if (allDetails) {
+        this.allDetailsObj = JSON.parse(allDetails);
+        }
+
+    this.departure = this.allDetailsObj.startFrom; // origin and destination both has to be fetched from the database
+    this.destination = this.allDetailsObj.endTo; // origin and destination both has to be fetched from the database
+    this.journeyDate = this.allDetailsObj.startingDate; // start date will depend upon the transport and destination however as of now we are taking it from the session storage
+
+    }
+
+
+// these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
+    onBookFlight(flight: IFlightDetails) {
+      this.allDetailsObj.startingDate=flight.departureDate; // Update the starting date with the selected flight's departure date
+      this.allDetailsObj.endingDate=flight.arrivalDate; // Update the ending date with the selected flight's arrival date
+      
+      sessionStorage.setItem('allDetails', JSON.stringify(this.allDetailsObj)); // Store the updated object back in session storage
+      
+      
+      this.route.navigate(['/bookFlight']);
     }
 }
