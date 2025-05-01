@@ -3,9 +3,12 @@ import { IPassengerDetails } from './IPassengerDetails';
 export interface ITravelDetails{
     startFrom: string,
     endTo: string,
-    startingDate: Date,
+    startDate: Date,
     endingDate: Date,
-    passengerNum: number,
+    passengerNo: number,
     bookingClass: string,
     passengers: IPassengerDetails[]
+
+
+
 }

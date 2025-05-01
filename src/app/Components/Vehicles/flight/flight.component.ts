@@ -18,9 +18,9 @@ export class FlightComponent implements OnInit {
   allDetails: ITravelDetails={
     startFrom: '',
     endTo: '',
-    startingDate: new Date(),
+    startDate: new Date(),
     endingDate: new Date(),
-    passengerNum: 0,
+    passengerNo: 0,
     bookingClass: '',
     passengers: []
   }
@@ -51,9 +51,9 @@ export class FlightComponent implements OnInit {
     // Store the necessary data into the object created above and storing it in session storage
     this.allDetails.startFrom = _form.value.departure;
     this.allDetails.endTo = _form.value.destination;
-    this.allDetails.startingDate = _form.value.journeyDate;
+    this.allDetails.startDate = _form.value.journeyDate;
     this.allDetails.endingDate = _form.value.returnDate;
-    this.allDetails.passengerNum = _form.value.numOfPassenger;
+    this.allDetails.passengerNo = _form.value.numOfPassenger;
     this.allDetails.bookingClass = _form.value.travelClass;
     this.allDetails.passengers = [];
     sessionStorage.setItem('allDetails', JSON.stringify(this.allDetails));

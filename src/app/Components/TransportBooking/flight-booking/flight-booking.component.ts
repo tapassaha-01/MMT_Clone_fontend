@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerbarComponent } from "../../customerbar/customerbar.component";
+import { UserService } from '../../../Services/user.service';
 
 @Component({
   selector: 'app-flight-booking',
@@ -14,7 +15,15 @@ export class FlightBookingComponent implements OnInit {
   bookingForm!: FormGroup;
   allDetailsObj: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router){
+  constructor(private formBuilder: FormBuilder, private router: Router,private _service: UserService ) {
+    this.bookingForm = this.formBuilder.group({
+      startFrom: ['', Validators.required],
+      endTo: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      passengerNum: [1, Validators.required],
+      passengers: this.formBuilder.array([this.createPassengerGroup()])
+    });
     
   }
 
@@ -28,7 +37,7 @@ export class FlightBookingComponent implements OnInit {
         endTo: [this.allDetailsObj.endTo],
         startDate: [this.allDetailsObj.departureDate], // start date will depend upon the transport and destination however as of now we are taking it from the session storage
         endDate: [this.allDetailsObj.arrivalDate], // Journey end date will depend upon destination and transport
-        passengerNum: [this.allDetailsObj.passengerNum], // depend upon how many seats left,
+        passengerNum: [this.allDetailsObj.passengerNo], // depend upon how many seats left,
         passengers: this.formBuilder.array([this.createPassengerGroup()])
       });
     }
@@ -52,7 +61,7 @@ export class FlightBookingComponent implements OnInit {
   }
 
   // Update passenger list when number changes
-  onNumberOfPassengersChange(count: number) {
+  onNumberOfPassengersChange(count: number) { 
     const passengerArray = this.passengers;
     const currentCount = passengerArray.length;
 
@@ -73,5 +82,15 @@ export class FlightBookingComponent implements OnInit {
     
     this.allDetailsObj.passengers = _form.value.passengers;
     sessionStorage.setItem('allDetails', JSON.stringify(this.allDetailsObj));
+
+    //calling to the service to book the flight ticket
+    this._service.bookFlight(this.allDetailsObj).subscribe((res) => {
+      console.log(res);
+      
+    }, (error) => {
+      console.error(error);
+      alert("An error occurred. Please try again.");
+    });
+
   }
 }
