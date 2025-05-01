@@ -51,14 +51,14 @@ export class ViewFlightsComponent implements OnInit {
 
     this.departure = this.allDetailsObj.startFrom; // origin and destination both has to be fetched from the database
     this.destination = this.allDetailsObj.endTo; // origin and destination both has to be fetched from the database
-    this.journeyDate = this.allDetailsObj.startingDate; // start date will depend upon the transport and destination however as of now we are taking it from the session storage
+    this.journeyDate = this.allDetailsObj.startDate; // start date will depend upon the transport and destination however as of now we are taking it from the session storage
 
     }
 
 
 // these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
     onBookFlight(flight: IFlightDetails) {
-      this.allDetailsObj.startingDate=flight.departureDate; // Update the starting date with the selected flight's departure date
+      this.allDetailsObj.startDate=flight.departureDate; // Update the starting date with the selected flight's departure date
       this.allDetailsObj.endingDate=flight.arrivalDate; // Update the ending date with the selected flight's arrival date
       
       sessionStorage.setItem('allDetails', JSON.stringify(this.allDetailsObj)); // Store the updated object back in session storage

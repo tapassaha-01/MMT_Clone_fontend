@@ -4,15 +4,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, Observable, throwError } from 'rxjs';
 import { IUser } from '../Interface/IUser';
 import { UserEntity } from '../Interface/UserEntity';
+import { ITravelDetails } from '../Interface/ITravelDetails';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  
+ 
  
 
   baseUrl:string = "http://localhost:9090/MMT/"
+  bookingUrl:string = "http://localhost:9090/MMT/Booking/"
 
   constructor(private http: HttpClient) { }
 
@@ -61,6 +63,12 @@ export class UserService {
   GetUserDetail(email: string): Observable<IUser>{
     return this.http.get<IUser>(''+email).pipe(catchError(this.errorHandler));
   }
+
+  bookFlight(allDetailsObj: ITravelDetails):Observable<ITravelDetails> {
+    return this.http.post<ITravelDetails>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(  catchError(this.errorHandler));
+
+  }
+  
 
   errorHandler(error: HttpErrorResponse){
     console.error(error);
