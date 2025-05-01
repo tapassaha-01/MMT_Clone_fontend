@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   otpForm!: FormGroup;
   showOtpForm: boolean = false;
-  
+  isLoading = false; // Loading state for the screen
 
   constructor(private formBuilder: FormBuilder, private _service: UserService, private router: Router){}
 
@@ -44,21 +44,21 @@ export class SignupComponent implements OnInit {
   }
 
   OnSubmitForm(form: FormGroup){
+    this.isLoading = true; // Set loading state to true
     this._service.generateOtp(form).subscribe(
       success=>{
         if(success){
+          this.isLoading = false; // Set loading state to true
           alert("User signup successful");
-
           console.log("OTP : ",success)
           // this.router.navigate(['/login']);
-
           console.log(success);
           this.showOtpForm = true;
           // this.router.navigate(['/login']);
-
         }
       },
       error=>{
+        this.isLoading = false; // Set loading state to true
         alert("Some error occured");
         this.ngOnInit();
       }
@@ -72,7 +72,6 @@ getOtpValue(): string {
         alert('OTP verified successfully');
         console.log('OTP verification success:', success);
         this.router.navigate(['/login']);
-        // this.router.navigate(['/dashboard']);
       }
     },
     error => {

@@ -67,6 +67,16 @@
                 <button type="submit" class="submit-button" >Sign Up</button>
             </div>
             <p class="already-a-member">Already a Member? <a routerLink="/login" href="#">Log In</a></p>
+
+            <div *ngIf="isLoading" class="loading-overlay">
+                <div class="loading-spinner">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+            </div>
+
+
         </form>}
         @if (showOtpForm) {
         <h2 class="form-header">Enter OTP</h2>

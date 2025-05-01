@@ -70,6 +70,7 @@ export class FlightBookingComponent implements OnInit {
   // these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
   OnBooking(_form: FormGroup){
     // Here we will send the data to the backend and then redirect to the payment page
+    
     this.allDetailsObj.passengers = _form.value.passengers;
     sessionStorage.setItem('allDetails', JSON.stringify(this.allDetailsObj));
   }
