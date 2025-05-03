@@ -1,1 +1,32 @@
-<p>review-booking works!</p>
+<app-customerbar></app-customerbar>
+<div class="container">
+  <h2>Review Booking</h2>
+  <div>
+    <p><strong>Departure:&nbsp;</strong> {{ allDetails.startFrom | titlecase }}</p>
+    <p><strong>Destination:&nbsp;</strong> {{ allDetails.endTo | titlecase }}</p>
+    <p><strong>Departure Date:&nbsp;</strong> {{ allDetails.startDate | date:'shortDate' }}</p>
+    <p><strong>Arriving Date:&nbsp;</strong> {{allDetails.endingDate | date:'shortDate' }} </p>
+    <p><strong>Number of Passengers:&nbsp;</strong> {{ allDetails.passengerNo }}</p>
+    <p><strong>Booking Class:&nbsp;</strong> {{ allDetails.bookingClass | titlecase }}</p>
+  </div>
+
+  <h2>Passenger Details</h2>
+  <div>
+    <div *ngFor="let passenger of allDetails.passengers; let i = index" class="passenger-card">
+      <h5>Passenger {{ i + 1 }}</h5>
+      <p><strong>Name:&nbsp;</strong> {{ passenger.name| titlecase }}</p>
+      <p><strong>Age:&nbsp;</strong> {{ passenger.age }}</p>
+      <p><strong>Phone No:&nbsp;</strong> {{ passenger.phoneNo }}</p>
+      <p><strong>Addhar No.&nbsp;</strong>{{passenger.addharNo}}</p>
+      <p><strong>BirthDate:&nbsp;</strong>{{passenger.birthdate | date: 'shortDate'}}</p>
+      <p><strong>Berth Type:&nbsp;</strong>{{passenger.berthType | titlecase}}</p>
+      <p><strong>Transport Type:&nbsp;</strong>{{passenger.transportType | titlecase}}</p>
+      <p><strong>Gender:&nbsp;</strong>{{passenger.gender | titlecase}}</p>
+      <p><strong>Nationality:&nbsp;</strong>{{passenger.nationality | titlecase}}</p>
+  </div>
+</div>
+<div class="button-container">
+    <button>Go back</button>
+    <button routerLink="/payment">Proced for payment</button>
+</div>
+</div>

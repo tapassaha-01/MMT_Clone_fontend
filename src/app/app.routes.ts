@@ -13,6 +13,7 @@ import { ViewFlightsComponent } from './Components/viewTransports/view-flights/v
 import { ViewTrainsComponent } from './Components/viewTransports/view-trains/view-trains.component';
 import { FlightBookingComponent } from './Components/TransportBooking/flight-booking/flight-booking.component';
 import { TrainBookingComponent } from './Components/TransportBooking/train-booking/train-booking.component';
+import { ReviewBookingComponent } from './Components/review-booking/review-booking.component';
 
 
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'payment', component: PaymentComponent},
+    {path: 'reviewBooking', component: ReviewBookingComponent },
     {path: 'flight', component: FlightComponent},
     {path: 'train', component: TrainComponent},
     {path: 'bus', component: BusComponent},

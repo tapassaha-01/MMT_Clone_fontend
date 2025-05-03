@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, Observable, throwError } from 'rxjs';
 import { IUser } from '../Interface/IUser';
-import { UserEntity } from '../Interface/UserEntity';
 import { ITravelDetails } from '../Interface/ITravelDetails';
 
 @Injectable({
@@ -32,6 +31,7 @@ export class UserService {
     );
   }
     
+  // 02 - METHOD TO REGISTER USER and send otp to email
   generateOtp(form: FormGroup<any>) :Observable<string>{
     var tempObj: IUser={
             userName: form.value.userName,
@@ -43,12 +43,7 @@ export class UserService {
          return this.http.post<string>(this.baseUrl + 'generateOtp', tempObj).pipe(catchError(this.errorHandler));
   }
 
-
-
-
-
-  
-
+  // 03 - METHOD TO VERIFY OTP and register user
   verifyOTP(otp: string, email: string): Observable<any>{
     const otpObj = {
       emailId: email,
@@ -59,17 +54,21 @@ export class UserService {
 
   }
 
-  // 03 - AFTER LOGIN=> METHOD TO SHOW USER PROFILE BASED ON USER-EMAIL
+  // 04 - AFTER LOGIN=> METHOD TO SHOW USER PROFILE BASED ON USER-EMAIL
   GetUserDetail(email: string): Observable<IUser>{
     return this.http.get<IUser>(''+email).pipe(catchError(this.errorHandler));
   }
 
+  // 05 - Booking flight
   bookFlight(allDetailsObj: ITravelDetails):Observable<ITravelDetails> {
-    return this.http.post<ITravelDetails>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(  catchError(this.errorHandler));
-
+    return this.http.post<ITravelDetails>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(catchError(this.errorHandler));
   }
   
+  // 06 - make payment method
+  
 
+  // ERROR HANDLER METHOD
+  // This method is used to handle errors from the server and return a user-friendly message.
   errorHandler(error: HttpErrorResponse){
     console.error(error);
     return throwError(error.message || "Server Error");

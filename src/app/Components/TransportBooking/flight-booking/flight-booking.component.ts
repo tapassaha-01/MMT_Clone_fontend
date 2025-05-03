@@ -21,7 +21,7 @@ export class FlightBookingComponent implements OnInit {
       endTo: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      passengerNum: [1, Validators.required],
+      passengerNum: ['', Validators.required],
       passengers: this.formBuilder.array([this.createPassengerGroup()])
     });
     
@@ -81,12 +81,14 @@ export class FlightBookingComponent implements OnInit {
     // Here we will send the data to the backend and then redirect to the payment page
     
     this.allDetailsObj.passengers = _form.value.passengers;
+    this.allDetailsObj.passengerNo = _form.value.passengerNum;
     sessionStorage.setItem('allDetails', JSON.stringify(this.allDetailsObj));
 
     //calling to the service to book the flight ticket
     this._service.bookFlight(this.allDetailsObj).subscribe((res) => {
-      console.log(res);
       
+      console.log(res);
+      this.router.navigate(['/reviewBooking']);
     }, (error) => {
       console.error(error);
       alert("An error occurred. Please try again.");

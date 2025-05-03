@@ -10,13 +10,19 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class PaymentComponent implements OnInit{
 
-  payerName: string='Debu';
-  paymentAmount = 7000;
+  payerName: string='';
+  paymentAmount = 0;
 
   paymentForm!: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder){
+    var userObj = localStorage.getItem('user');
+    if(userObj != null){
+      var user = JSON.parse(userObj);
+      this.payerName = user.userName;
+    }
+  }
 
   ngOnInit(): void {
       this.paymentForm=this.formBuilder.group({
@@ -32,15 +38,5 @@ export class PaymentComponent implements OnInit{
   // Method to confirm payment
   OnPayment(_form: FormGroup){
     
-  }
-
-  // to fetch the user name from the DB
-  OnGetName(){
-    
-  }
-
-  // to fetch the amount to be paid by the user
-  OnGetPaymentAmount(){
-
   }
 }

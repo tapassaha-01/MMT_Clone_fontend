@@ -114,8 +114,9 @@
  }
  
  .label-input-div-container {
-    gap: 0.5rem;
+    gap: 5px;
     display: grid;
+    padding-bottom: 5px;
     grid-template-columns: 1fr 1fr;
  }
  
@@ -221,7 +222,30 @@
  }
 
 
-
+ .gender-select {
+   width: 100%;
+   padding: 10px 12px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 6px;
+   background-color: #f9f9f9;
+   appearance: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   background-image: url('data:image/svg+xml;utf8,<svg fill="%23007BFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+   background-repeat: no-repeat;
+   background-position: right 12px center;
+   background-size: 18px;
+   cursor: pointer;
+   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+ }
+ 
+ .gender-select:focus {
+   border-color: #007BFF;
+   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+   outline: none;
+ }
+ 
 
 
 

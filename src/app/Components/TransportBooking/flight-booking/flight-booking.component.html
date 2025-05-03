@@ -39,7 +39,7 @@
                 <!-- passengerNumber -->
                 <div class="label-input-div">
                     <label class="form-font">Number of passengers</label>
-                    <input type="number" formControlName="passengerNum" class="form-input" min="1" (input)="onNumberOfPassengersChange(bookingForm.get('passengerNum')?.value)">
+                    <input type="number" formControlName="passengerNum" class="form-input" (input)="onNumberOfPassengersChange(bookingForm.get('passengerNum')?.value)">
                     @if (bookingForm.controls['passengerNum'].touched || bookingForm.controls['passengerNum'].dirty) {
                         <small *ngIf="bookingForm.controls['passengerNum'].errors?.['required']" class="invalid-input">Please provide the number of passengers!</small>
                     }
@@ -102,7 +102,7 @@
                       <div class="label-input-div">
                         <!-- Gender -->
                         <label>Gender:</label>
-                        <select formControlName="gender">
+                        <select formControlName="gender" class="gender-select">
                             <option value="">Select</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
