@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { IUser } from '../Interface/IUser';
 import { ITravelDetails } from '../Interface/ITravelDetails';
 
@@ -64,8 +64,17 @@ export class UserService {
     return this.http.post<ITravelDetails>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(catchError(this.errorHandler));
   }
   
-  // 06 - make payment method
-  
+  // 06 - payment otp
+  generatePaymentOtp(form: FormGroup): Observable<string> {
+    const temp: Observable<string> = of('123456');
+    // this.http.post<string>('', form).pipe(catchError(this.errorHandler));
+    return temp;
+  }
+
+  // 07 - Update user profile
+  UpdateUserDetail(form: FormGroup): Observable<IUser> {
+    return this.http.put<IUser>(this.baseUrl + 'update', form).pipe(catchError(this.errorHandler));
+  }
 
   // ERROR HANDLER METHOD
   // This method is used to handle errors from the server and return a user-friendly message.
