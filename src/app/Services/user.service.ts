@@ -50,7 +50,7 @@ export class UserService {
       otp: otp
     };
     console.log(otpObj);
-    return this.http.post<any>(this.baseUrl+"register", otpObj).pipe(catchError(this.errorHandler));
+    return this.http.post<any>(this.bookingUrl+"verifyTicketOtp", otpObj).pipe(catchError(this.errorHandler));
 
   }
 
@@ -60,8 +60,8 @@ export class UserService {
   }
 
   // 05 - Booking flight
-  bookFlight(allDetailsObj: ITravelDetails):Observable<ITravelDetails> {
-    return this.http.post<ITravelDetails>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(catchError(this.errorHandler));
+  bookFlight(allDetailsObj: ITravelDetails):Observable<Map<string,string> >{
+    return this.http.post<Map<string, string>>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(catchError(this.errorHandler));
   }
   
   // 06 - payment otp

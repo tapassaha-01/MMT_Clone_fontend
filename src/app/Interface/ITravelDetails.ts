@@ -7,6 +7,7 @@ export interface ITravelDetails{
     endingDate: Date,
     passengerNo: number,
     bookingClass: string,
+    emailId: string,
     passengers: IPassengerDetails[]
 
 

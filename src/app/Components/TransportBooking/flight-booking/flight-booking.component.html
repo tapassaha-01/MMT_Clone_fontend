@@ -1,6 +1,7 @@
 <app-customerbar></app-customerbar>
 <div class="signup-container">
     <div class="signup-frame">
+     @if (!showOtpForm) {
         <h2 class="form-header">Booking Details</h2>
         <form [formGroup]="bookingForm" (ngSubmit)="OnBooking(bookingForm)">
 
@@ -43,6 +44,10 @@
                     @if (bookingForm.controls['passengerNum'].touched || bookingForm.controls['passengerNum'].dirty) {
                         <small *ngIf="bookingForm.controls['passengerNum'].errors?.['required']" class="invalid-input">Please provide the number of passengers!</small>
                     }
+                </div>
+                <div class="label-input-div">
+                    <label class="form-font">Email Id</label>
+                    <input type="email" formControlName="emailId" class="form-input" >
                 </div>
             </div>
             <hr />
@@ -130,6 +135,30 @@
             <div class="submit-button-container">
                 <button type="submit" class="submit-button" [disabled]="bookingForm.invalid">Submit Details</button>
             </div>
-        </form>
+            </form>}
+    
+    @else {
+        <h2 class="form-header">Enter OTP</h2>
+        <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+            <div class="d-flex gap-2 justify-content-center">
+              <input type="text" formControlName="otp1" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp2)" #otp1 />
+              <input type="text" formControlName="otp2" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp3)" #otp2 />
+              <input type="text" formControlName="otp3" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp4)" #otp3 />
+              <input type="text" formControlName="otp4" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp5)" #otp4 />
+              <input type="text" formControlName="otp5" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, otp6)" #otp5 />
+              <input type="text" formControlName="otp6" maxlength="1" class="form-control text-center" style="width:50px; height:50px;"
+                (input)="move($event, null)" #otp6 />
+            </div>
+          
+            <div class="text-center mt-3">
+              <button class="btn btn-primary" type="submit">Submit OTP</button>
+            </div>
+          </form>
+        }
     </div>
 </div>

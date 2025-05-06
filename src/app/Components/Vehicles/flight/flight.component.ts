@@ -22,6 +22,7 @@ export class FlightComponent implements OnInit {
     endingDate: new Date(),
     passengerNo: 0,
     bookingClass: '',
+    emailId: '',
     passengers: []
   }
 

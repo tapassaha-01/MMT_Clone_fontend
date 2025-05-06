@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
       passwordName: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
     }, { validators: checkPassword() });
+    
     this.otpForm = this.formBuilder.group({
       otp1: new FormControl(''),
       otp2: new FormControl(''),
