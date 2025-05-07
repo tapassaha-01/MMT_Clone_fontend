@@ -13,14 +13,14 @@
         <!-- <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png"> <p>Flights</p></div> -->
 
 
-        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="../../../../assets/flight.png"> <p>Flights</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png" width="25px" height="20px"> <p>Flights</p></div>
 
 
 
-        <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')"><img src="assets/train.png"><p>Trains</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')"><img src="assets/hotels.png"> <p>Hotels</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')"><img src="assets/bus.jpg"><p>Buses</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'cab'}" (click)="OnTransportSelection('cab')"><img src="assets/taxi.png"><p>Cabs</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')"><img src="assets/train.png" width="25px" height="20px"><p>Trains</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')"><img src="assets/hotels.png" width="25px" height="20px"> <p>Hotels</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')"><img src="assets/bus.jpg" width="25px" height="20px"><p>Buses</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'cab'}" (click)="OnTransportSelection('cab')"><img src="assets/taxi.png" width="25px" height="20px"><p>Cabs</p></div>
     </div>
     <!-- depending on the img div selected, the app-component will be loaded -->
     <div class="main">
