@@ -7,7 +7,7 @@ html, body {
     /* background-image: url('./app/Assets/background.jpg'); */
     background-color: bisque;
 
-    background-image: url('./assets/background.jpg');
+    background-image: url('/assets/background.jpg');
 
     background-size: cover; 
 }
