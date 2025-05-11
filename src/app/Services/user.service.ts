@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { IUser } from '../Interface/IUser';
 import { ITravelDetails } from '../Interface/ITravelDetails';
+import { IFlightDetails } from '../Interface/IFlightDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,12 @@ export class UserService {
   // 07 - Update user profile
   UpdateUserDetail(form: FormGroup): Observable<IUser> {
     return this.http.put<IUser>(this.baseUrl + 'update', form).pipe(catchError(this.errorHandler));
+  }
+
+
+  // 08 - Fecth all flight details
+  GetFlightDetails(flightDetails: IFlightDetails): Observable<IFlightDetails[]> {
+    return this.http.post<IFlightDetails[]>(this.baseUrl + 'getFlightDetails', flightDetails).pipe(catchError(this.errorHandler));
   }
 
   // ERROR HANDLER METHOD

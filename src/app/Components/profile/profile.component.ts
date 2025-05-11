@@ -18,7 +18,24 @@ export class ProfileComponent implements OnInit {
   userEmail: string="";
   profilePic: string="";
   passwordEnch: string = '';
+
   profileUpdate: boolean = false;
+  profilePicUpdate: boolean = false;
+
+  profilePicList: string[] = [
+    "/assets/ProfileAvatars/pic1.jpg",
+    "/assets/ProfileAvatars/pic2.jpg",
+    "/assets/ProfileAvatars/pic3.jpg",
+    "/assets/ProfileAvatars/pic4.jpg",
+    "/assets/ProfileAvatars/pic5.jpg",
+    "/assets/ProfileAvatars/pic6.jpeg",
+    "/assets/ProfileAvatars/pic7.jpeg",
+    "/assets/ProfileAvatars/pic8.jpeg",
+    "/assets/ProfileAvatars/pic9.jpeg",
+    "/assets/ProfileAvatars/pic10.jpeg",
+    "/assets/ProfileAvatars/pic11.jpeg",
+    "/assets/ProfileAvatars/pic12.jpeg"
+  ];
 
   profileUpdateForm!: FormGroup;
 
@@ -49,7 +66,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profilePic = "/assets/ProfileAvatars/pic1.jpg";
     this.passwordEnch = 'x'.repeat(this.userProfile.password.length);
   }
 
@@ -84,4 +100,15 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+
+  // Update profile pic
+  UpdateProfilePic(){
+    this.profilePicUpdate = !this.profilePicUpdate;
+  }
+
+  // Set profile pic
+  SetProfilePic(pic: string){
+    this.profilePic = pic;
+    this.profilePicUpdate = false;
+  }
 }

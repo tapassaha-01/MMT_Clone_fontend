@@ -14,10 +14,12 @@ import { ViewTrainsComponent } from './Components/viewTransports/view-trains/vie
 import { FlightBookingComponent } from './Components/TransportBooking/flight-booking/flight-booking.component';
 import { TrainBookingComponent } from './Components/TransportBooking/train-booking/train-booking.component';
 import { ReviewBookingComponent } from './Components/review-booking/review-booking.component';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
 
 
 export const routes: Routes = [
-    {path: '', redirectTo:'homeview', pathMatch:'full'},
+    {path: '', redirectTo:'welcome', pathMatch:'full'},
+    {path: 'welcome', component: WelcomeComponent},
     {path: 'homeview', component: HomeComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'login', component: LoginComponent},

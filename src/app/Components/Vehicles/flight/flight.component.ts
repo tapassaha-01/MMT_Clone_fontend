@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ITravelDetails } from '../../../Interface/ITravelDetails';
+import { UserService } from '../../../Services/user.service';
 
 
 @Component({
@@ -12,6 +13,9 @@ import { ITravelDetails } from '../../../Interface/ITravelDetails';
   styleUrl: './flight.component.css'
 })
 export class FlightComponent implements OnInit {
+
+  private _service = inject(UserService);
+  
 
   searchFlightForm!: FormGroup;
   travelClass: string[] = ['Business', 'First Class', 'Economy', 'Premium Economy'];
@@ -23,7 +27,8 @@ export class FlightComponent implements OnInit {
     passengerNo: 0,
     bookingClass: '',
     emailId: '',
-    passengers: []
+    passengers: [],
+    bookingDate: new Date()
   }
 
   constructor(private formBuilder: FormBuilder, private route: Router){

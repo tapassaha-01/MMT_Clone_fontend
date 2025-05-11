@@ -4,16 +4,25 @@
         <h3>From {{departure}} to {{destination}}</h3>
         <h6>Details for flights on {{journeyDate | date: 'shortDate'}}</h6>
     </div>
-    <table>
-        <tbody>
-            <tr *ngFor="let item of flightDetails">
-                <th>{{item.travelCompanyName}}</th>
-                <th>{{item.departureDate}}</th>
-                <th>{{item.totalTime}} hours journey</th>
-                <th>{{item.arrivalDate}}</th>
-                <th>{{item.price}}</th>
-                <th><button class="book-btn" (click)="onBookFlight(item)">Book</button></th>
-            </tr>
-        </tbody>
-    </table>
+    @if(allFlightDetailsArray.length>0){
+        <table>
+            <tbody>
+                <tr *ngFor="let item of allFlightDetailsArray">
+                    <th>{{item.planeCompanyName | titlecase }}</th>
+                    <th>{{item.departureDate | date: 'shortTime'}}</th>
+                    <th>{{item.arrivalDate | date: 'shortTime'}}</th>
+                    <th>{{item.startFrom | titlecase }}</th>
+                    <th>{{item.destination | titlecase }}</th>
+                    <th>{{item.travelTime}}</th>
+                    <th>{{item.flightClass | titlecase }}</th>
+                    <th>{{item.fairType | titlecase }}</th>
+                    <th>{{item.price | currency: 'USD'}}</th>               
+                    <th><button class="book-btn" (click)="onBookFlight(item)">Book</button></th>
+                </tr>
+            </tbody>
+        </table>
+    } 
+    @else {
+        <h4>No flights available for the selected date</h4>
+    }
 </div>

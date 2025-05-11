@@ -8,8 +8,6 @@ export interface ITravelDetails{
     passengerNo: number,
     bookingClass: string,
     emailId: string,
-    passengers: IPassengerDetails[]
-
-
-
+    passengers: IPassengerDetails[],
+    bookingDate: Date
 }

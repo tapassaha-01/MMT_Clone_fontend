@@ -3,10 +3,11 @@ import { IFlightDetails } from '../../../Interface/IFlightDetails';
 import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerbarComponent } from "../../customerbar/customerbar.component";
+import { UserService } from '../../../Services/user.service';
 
 @Component({
   selector: 'app-view-flights',
-  imports: [CommonModule, NgFor, CustomerbarComponent],
+  imports: [CommonModule, CustomerbarComponent],
   templateUrl: './view-flights.component.html',
   styleUrl: './view-flights.component.css'
 })
@@ -14,36 +15,34 @@ export class ViewFlightsComponent implements OnInit {
 
   private route = inject(Router);
   allDetailsObj: any;
+  allFlightDetailsArray: IFlightDetails[] = [];
+  requiredFlightDetails: IFlightDetails = {
+    planeCompanyName: '',
+    departureDate: new Date(),
+    arrivalDate: new Date(),
+    startFrom: '',
+    destination: '',
+    travelTime: 0,
+    flightClass: '',
+    fairType: '',
+    price: 0
+  }
 
   departure: string = "";
   destination: string = "";
   journeyDate: Date = new Date();
-
-    flight1: IFlightDetails ={
-      travelCompanyName: 'AirIndia',
-      departureDate: new Date(2025, 5, 10, 10, 15),
-      totalTime: 2.5,
-      arrivalDate: new Date(2025, 5, 11, 13, 15),
-      price: 25000
-    }
   
-    flight2: IFlightDetails ={
-      travelCompanyName: 'JetAirways',
-      departureDate: new Date(2025, 7, 18, 16, 15),
-      totalTime: 4.5,
-      arrivalDate: new Date(2025, 7, 19, 20, 15),
-      price: 30000
-    }
-  
-    flightDetails = [this.flight1, this.flight2];
-
+  private _service = inject(UserService);
     // have to change this drastically as i need get method for the flight details 
     // have to add sessionstorage.getitem and then parse it to get the object and then use it in the constructor
     constructor(){
-      
+      this.GetFlightDetails();
     }
   
     ngOnInit(): void {
+
+      // this.flightDetailsArray = GetFlightDetails(); // This function will be used to get the flight details from the database
+  
       var allDetails = sessionStorage.getItem('allDetails');
       if (allDetails) {
         this.allDetailsObj = JSON.parse(allDetails);
@@ -55,8 +54,20 @@ export class ViewFlightsComponent implements OnInit {
 
     }
 
+    // Fetch all the flight details using the service.ts method
+    GetFlightDetails() {
+      this._service.GetFlightDetails(this.requiredFlightDetails).subscribe(
+        (data: IFlightDetails[]) => {
+          this.allFlightDetailsArray = data;
+          console.log(this.allFlightDetailsArray);
+        },
+        (error) => {
+          console.error('Error fetching flight details:', error);
+        }
+      );
+    }
 
-// these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
+    // these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
     onBookFlight(flight: IFlightDetails) {
       this.allDetailsObj.startDate=flight.departureDate; // Update the starting date with the selected flight's departure date
       this.allDetailsObj.endingDate=flight.arrivalDate; // Update the ending date with the selected flight's arrival date

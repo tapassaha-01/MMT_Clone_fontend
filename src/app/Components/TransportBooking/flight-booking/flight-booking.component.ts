@@ -16,8 +16,7 @@ export class FlightBookingComponent implements OnInit {
 
   bookingForm!: FormGroup;
   allDetailsObj!: ITravelDetails;
-  showOtpForm: boolean = false;
-  otpForm!: FormGroup;
+  
   constructor(private formBuilder: FormBuilder, private router: Router,private _service: UserService ) {
     this.bookingForm = this.formBuilder.group({
       startFrom: ['', Validators.required],
@@ -27,16 +26,7 @@ export class FlightBookingComponent implements OnInit {
       passengerNum: ['', Validators.required],
       emailId: ['', Validators.required],
       passengers: this.formBuilder.array([this.createPassengerGroup()])
-    });
-    this.otpForm = this.formBuilder.group({
-      otp1: new FormControl(''),
-      otp2: new FormControl(''),
-      otp3: new FormControl(''),
-      otp4: new FormControl(''),
-      otp5: new FormControl(''),
-      otp6: new FormControl(''),
-    });
-    
+    });    
   }
 
   ngOnInit(): void {
@@ -96,41 +86,20 @@ export class FlightBookingComponent implements OnInit {
     this.allDetailsObj.passengers = _form.value.passengers;
     this.allDetailsObj.passengerNo = _form.value.passengerNum;
     this.allDetailsObj.emailId = _form.value.emailId;
-    console.log(_form.value.emailId);
+    this.allDetailsObj.bookingDate = new Date(); // Set the booking date to the current date
+
     sessionStorage.setItem('allDetails', JSON.stringify(this.allDetailsObj));
 
     //calling to the service to book the flight ticket
     this._service.bookFlight(this.allDetailsObj).subscribe((res) => {
       console.log(res);
-      this.showOtpForm = true; // Show the OTP form
-    }, (error) => {
+    }, 
+    
+    (error) => {
       console.error(error);
       this.bookingForm.reset(); // Reset the form on error
       alert("An error occurred. Please try again.");
     });
 
   }
-  move(event: any, nextInput: any) {
-    if (event.target.value.length === 1 && nextInput) {
-      nextInput.focus();
-    }
-  }
-  verifyOtp() {
-    const otp = Object.values(this.otpForm.value).join('');
-    this._service.verifyOTP(otp,this.allDetailsObj.emailId).subscribe(
-      success => {
-        if (success) {
-          alert('OTP verified successfully');
-          console.log('OTP verification success:', success);
-          this.router.navigate(['/reviewBooking']);
-        }
-      },
-      error => {
-        alert('OTP verification failed');
-        this.showOtpForm = false; // Hide the OTP form on error
-        this.bookingForm.reset(); // Reset the form on error
-        console.error('OTP verification error:', error);
-      });
-
-    }
 }

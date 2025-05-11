@@ -22,10 +22,18 @@
       }
     </div>
     <div class="image-container">
-      <h1>Photo</h1>
+      <h1>Profile Photo</h1>
       <div>
-        <img [src]="profilePic" alt="Profile Photo">
+        <img [src]="profilePic" alt="Set your profile pic" (click)="UpdateProfilePic()">
       </div>
+      @if(profilePicUpdate){
+          <h4>Update Profile Photo</h4>
+          <div class="profile-photo-gallery">
+            <img *ngFor="let image of profilePicList" [src]="image" alt="Profile Photo" (click)="SetProfilePic(image)">
+          </div>
+          <br>
+          <button (click)="UpdateProfilePic()">Cancel</button>
+      }
     </div>
 </div>
 }
@@ -84,5 +92,4 @@
       </div>
     </form>
   </div>
-  
 }

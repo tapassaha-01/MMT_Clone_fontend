@@ -65,13 +65,18 @@
     background-color: #00796b;
   }
 
-  .image-container {
-    background-color: rgba(240, 248, 255, 0.56);
-    border-radius: 20px;
-    padding: 20px;
-    min-width: 200px;
-    text-align: center;
-  }
+.image-container {
+  background-color: rgba(240, 248, 255, 0.56);
+  border-radius: 20px;
+  padding: 20px;
+  width: 250px; /* or auto-fit based on content */
+  text-align: center;
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  align-items: center;
+}
+
   
   .image-container img {
     width: 150px;
@@ -79,6 +84,7 @@
     object-fit: cover;
     border-radius: 50%;
     border: 2px solid #ccc;
+    cursor: pointer;
   }
   
   .profile-container {
@@ -152,3 +158,16 @@
     background-color: #d1d5db;
   }
   
+.profile-photo-gallery {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+.profile-photo-gallery img.selected {
+  border-color: #007bff;
+}
