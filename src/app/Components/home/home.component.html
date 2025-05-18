@@ -6,18 +6,11 @@
 }
 <div class="body-div">
     <div class="header">
-        <img src="assets/logo.png" alt="Logo">
-        <h1>{{title}}</h1>
+        <p style="color: white;">Advertisment bar</p>
     </div>
     <div class="nav">
         <!-- each img tag below will be connected to different services -->
-        <!-- <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png"> <p>Flights</p></div> -->
-
-
         <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png" width="25px" height="20px"> <p>Flights</p></div>
-
-
-
         <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')"><img src="assets/train.png" width="25px" height="20px"><p>Trains</p></div>
         <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')"><img src="assets/hotels.png" width="25px" height="20px"> <p>Hotels</p></div>
         <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')"><img src="assets/bus.jpg" width="25px" height="20px"><p>Buses</p></div>
@@ -30,5 +23,38 @@
         <app-bus *ngIf="selectedTransport === 'bus'"></app-bus>
         <app-hotel *ngIf="selectedTransport === 'hotel'"></app-hotel>
         <app-cab *ngIf="selectedTransport === 'cab'"></app-cab>
+    </div>
+</div>
+
+<div class="blog-div">
+    <h4>Best Deals</h4>
+    <div class="inner-box-wrapper">
+        <div class="inner-box" *ngFor="let blog of loremArray">
+            <img [src]="blog[1]" alt="Blog Image">
+            <div class="inner-box">
+                {{blog[0]}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="blog-div">
+    <h4>Customer Experiences</h4>
+    <div class="inner-box-wrapper">
+        <div class="inner-box">Best Reviews</div>
+        <div class="inner-box">What to do</div>
+    </div>
+</div>
+
+<div class="footer">
+    <div>
+        <img src="assets/footer/Instagram.png" alt="Insta logo">
+        <img src="assets/footer/facebook.png" alt="Facebook logo">
+        <img src="assets/footer/Twitter.png" alt="Twitter logo">
+        <img src="assets/footer/WhatsApp.png" alt="WhatsApp logo">
+    </div>
+    <div>
+        <p>Contact us: 123-456-7890</p>
+        <p>Copyright © 2025 Travel Agency</p>
     </div>
 </div>

@@ -60,3 +60,17 @@
 .dropdown:hover button {
   background-color: #3f82e0;
 }
+
+.title-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.heading-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}

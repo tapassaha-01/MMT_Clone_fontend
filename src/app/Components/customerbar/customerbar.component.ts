@@ -14,7 +14,6 @@ export class CustomerbarComponent implements OnInit{
   constructor(private router: Router){}
 
   ngOnInit(): void {
-      // this.userName = 
       var user = JSON.parse(localStorage.getItem('user') || '{}');
       this.userName = user.userName || ''; 
   }
