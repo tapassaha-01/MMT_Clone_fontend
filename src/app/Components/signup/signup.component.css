@@ -27,7 +27,7 @@
     padding-inline-start: 1.25rem;
     font-weight: 900;
     font-size: 2rem;
-    font-family: Roboto;
+    
     margin-block: 0.5em;
  }
  
@@ -136,7 +136,7 @@
  }
  
  .form-font {
-    font-family: Roboto;
+    
     padding-block: 0.25rem;
     padding-inline: 0.25rem;
  }
@@ -204,12 +204,11 @@
  }
  .validation-Confirmation {
     padding: 0.25rem;
-    font-family: 'Roboto';
     color: var(--danger);
  }
  .already-a-member{
     text-align: center;
-    font-family: Roboto;
+    
     color: var(--bs-gray-900);
  }
  .already-a-member a{

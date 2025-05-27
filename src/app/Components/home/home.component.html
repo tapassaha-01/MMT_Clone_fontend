@@ -6,15 +6,30 @@
 }
 <div class="body-div">
     <div class="header">
-        <p style="color: white;">Advertisment bar</p>
+        <p>Advertisment bar</p>
     </div>
     <div class="nav">
         <!-- each img tag below will be connected to different services -->
-        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')"><img src="assets/flight.png" width="25px" height="20px"> <p>Flights</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')"><img src="assets/train.png" width="25px" height="20px"><p>Trains</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')"><img src="assets/hotels.png" width="25px" height="20px"> <p>Hotels</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')"><img src="assets/bus.jpg" width="25px" height="20px"><p>Buses</p></div>
-        <div [ngClass]="{'active': selectedTransport === 'cab'}" (click)="OnTransportSelection('cab')"><img src="assets/taxi.png" width="25px" height="20px"><p>Cabs</p></div>
+        <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')">
+            <img src="assets/flight.png" width="25px" height="20px">
+            <p>Flights</p>
+        </div>
+        <div [ngClass]="{'active': selectedTransport === 'train'}" (click)="OnTransportSelection('train')">
+            <img src="assets/train.png" width="25px" height="20px">
+            <p>Trains</p>
+        </div>
+        <div [ngClass]="{'active': selectedTransport === 'hotel'}" (click)="OnTransportSelection('hotel')">
+            <img src="assets/hotels.png" width="25px" height="20px">
+            <p>Hotels</p>
+        </div>
+        <div [ngClass]="{'active': selectedTransport === 'bus'}" (click)="OnTransportSelection('bus')">
+            <img src="assets/bus.jpg" width="25px" height="20px">
+            <p>Buses</p>
+        </div>
+        <div [ngClass]="{'active': selectedTransport === 'cab'}" (click)="OnTransportSelection('cab')">
+            <img src="assets/taxi.png" width="25px" height="20px">
+            <p>Cabs</p>
+        </div>
     </div>
     <!-- depending on the img div selected, the app-component will be loaded -->
     <div class="main">
@@ -46,15 +61,3 @@
     </div>
 </div>
 
-<div class="footer">
-    <div>
-        <img src="assets/footer/Instagram.png" alt="Insta logo">
-        <img src="assets/footer/facebook.png" alt="Facebook logo">
-        <img src="assets/footer/Twitter.png" alt="Twitter logo">
-        <img src="assets/footer/WhatsApp.png" alt="WhatsApp logo">
-    </div>
-    <div>
-        <p>Contact us: 123-456-7890</p>
-        <p>Copyright © 2025 Travel Agency</p>
-    </div>
-</div>

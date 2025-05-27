@@ -1,11 +1,13 @@
-
+form small{
+    color: #ff0000;
+    font-size: 0.9em;
+}
 .header {
     text-align: center;
     margin-bottom: 20px;
 }
 
 .header h1 {
-    font-family: 'Cursive';
     font-size: 2em;
     margin: 0;
 }
@@ -55,6 +57,11 @@
     flex: 1;
     text-align: center;
     margin: 5px;
+
+    background: rgba(255, 255, 255, 0.589);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .selection-container {
@@ -62,6 +69,7 @@
     justify-content: space-around;
     gap: 10px;
     padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .radio-label {
@@ -106,13 +114,29 @@ input[type="number"], input[type="text"], input[type="date"], select {
     border: none;              /* Remove default border */
     border-radius: 10px;       /* Rounded corners */
     background-color: transparent; /* Light background */
-    font-family: 'Arial', sans-serif;
     font-size: 16px;
-    box-shadow: inset 0 0 8px rgba(132, 132, 132, 0.214); /* Soft inner shadow */
+    box-shadow: inset 0 0 8px rgba(215, 215, 215, 0.407); /* Soft inner shadow */
     transition: all 0.3s ease; /* Smooth focus effect */
+}
+
+input:active, select:active, input:focus, select:focus {
+    background-color: rgba(160, 223, 255, 0.8); /* Slightly darker on focus */
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+input[type="number"]{
+    width: 50px;
 }
 
 input[type="number"]:focus {
     outline: none;
     box-shadow: inset 0 0 10px rgba(180, 180, 180, 0.3); /* More prominent shadow */
+}
+
+.invalid-input {
+  border: 1px solid red;
+  background-color: #ffe5e5; /* Light red background */
+  color: #000; /* Optional: change text color for readability */
 }

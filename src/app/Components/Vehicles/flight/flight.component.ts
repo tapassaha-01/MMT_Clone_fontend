@@ -37,7 +37,7 @@ export class FlightComponent implements OnInit {
         departure: ['', [Validators.required]],
         destination: ['', [Validators.required]],
         journeyDate: ['', [Validators.required, CheckJourneyDate]],
-        returnDate: ['', [Validators.required]],
+        returnDate: [''],
         numOfPassenger: [1, [Validators.required]],
         travelClass: ['', [Validators.required]],
         fare: ['', [Validators.required]]
@@ -54,6 +54,14 @@ export class FlightComponent implements OnInit {
 
 // these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
   OnSearchTransport(_form: FormGroup){
+    // chechikng if any fields are empty
+    if (this.searchFlightForm.invalid) {
+      // Mark all controls as touched to show errors
+      this.searchFlightForm.markAllAsTouched();
+      return;
+    }
+    
+
     // Store the necessary data into the object created above and storing it in session storage
     this.allDetails.startFrom = _form.value.departure;
     this.allDetails.endTo = _form.value.destination;
@@ -66,6 +74,11 @@ export class FlightComponent implements OnInit {
 
     this.route.navigate(['/viewFlight']);
   }
+
+  // isFieldInvalid(fieldName: string): boolean {
+  //   const field = this.searchFlightForm.get(fieldName);
+  //   return field?.invalid && field?.touched || false;
+  // }
 
 }
 

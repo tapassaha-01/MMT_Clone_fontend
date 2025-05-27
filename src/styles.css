@@ -1,14 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-    height: 100%;
-    margin: 20px;
-
-    /* background-image: url('./app/Assets/background.jpg'); */
-    background-color: bisque;
-
-    background-image: url('/assets/background.jpg');
-
-    background-size: cover; 
+/* Global body style */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(-45deg, #a3dae1, #73b5d3, #2892c3, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  min-height: 100vh;
+  color: #0d47a1; /* dark blue for contrast */
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Smooth animated gradient */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Optional: Scrollbar styling to match the theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #e0f7fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #81d4fa;
+  border-radius: 10px;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+

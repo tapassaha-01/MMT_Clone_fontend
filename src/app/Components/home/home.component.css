@@ -1,14 +1,9 @@
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Georgia', serif;
-  font-weight: bold;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  color: #ddeeff;
-}
-
 .body-div {
-    font-family: Arial, sans-serif;
+    /* background-image: url('/public/assets/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+ */
     margin: 0;
     padding: 20px;
 }
@@ -21,13 +16,6 @@ h1, h2, h3, h4, h5, h6 {
     gap: 10px;
     justify-content: center;
     align-items: center;
-}
-
-.header h1 {
-    font-family: 'Cursive';
-    font-size: 2em;
-    margin: 0;
-    color: white;
 }
 
 .header img {
@@ -51,10 +39,19 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     top: 35px;
     z-index: 10;
+
+
 }
+
 .nav div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding: 5px;
 }
+
 
 .nav div.active {
     background-color: transparent;
@@ -119,8 +116,7 @@ input, select{
     border: 0px;
     background-color: #b7b7b776;
     border-radius: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 input:focus, select:focus {
@@ -129,9 +125,8 @@ input:focus, select:focus {
 
 
 .blog-div {
-  font-family: 'Times New Roman', Times, serif;
   color: black;
-  background-color: #cccccc91;
+  background-color: #ffffffa7;
   padding: 10px;
   margin: 10px auto;
   width: 90%;
@@ -169,30 +164,4 @@ input:focus, select:focus {
   width: 100%;
   height: 200px;
   border-radius: 10px;
-}
-
-.footer{
-    background-color: #000000;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    font-family: 'Times New Roman', Times, serif;
-
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.footer img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-right: 20px;
-    cursor: pointer;
 }
