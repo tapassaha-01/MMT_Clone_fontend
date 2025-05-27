@@ -15,6 +15,7 @@ export class UserService {
 
   baseUrl:string = "http://localhost:9090/MMT/"
   bookingUrl:string = "http://localhost:9090/MMT/Booking/"
+  adminUrl:string = "http://localhost:9090/MMT/Admin/"
 
   constructor(private http: HttpClient) { }
 
@@ -80,7 +81,7 @@ export class UserService {
 
   // 08 - Fecth all flight details
   GetFlightDetails(flightDetails: IFlightDetails): Observable<IFlightDetails[]> {
-    return this.http.post<IFlightDetails[]>(this.baseUrl + 'getFlightDetails', flightDetails).pipe(catchError(this.errorHandler));
+    return this.http.post<IFlightDetails[]>(this.adminUrl + 'getFlightDetails', flightDetails).pipe(catchError(this.errorHandler));
   }
 
   // ERROR HANDLER METHOD

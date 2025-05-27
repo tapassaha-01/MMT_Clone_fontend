@@ -26,6 +26,7 @@ export class FlightComponent implements OnInit {
     endingDate: new Date(),
     passengerNo: 0,
     bookingClass: '',
+    fairType: '',
     emailId: '',
     passengers: [],
     bookingDate: new Date()
@@ -69,6 +70,7 @@ export class FlightComponent implements OnInit {
     this.allDetails.endingDate = _form.value.returnDate;
     this.allDetails.passengerNo = _form.value.numOfPassenger;
     this.allDetails.bookingClass = _form.value.travelClass;
+    this.allDetails.fairType = _form.value.fare;
     this.allDetails.passengers = [];
     sessionStorage.setItem('allDetails', JSON.stringify(this.allDetails));
 

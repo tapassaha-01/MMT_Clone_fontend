@@ -36,7 +36,7 @@ export class ViewFlightsComponent implements OnInit {
     // have to change this drastically as i need get method for the flight details 
     // have to add sessionstorage.getitem and then parse it to get the object and then use it in the constructor
     constructor(){
-      this.GetFlightDetails();
+      // this.GetFlightDetails();
     }
   
     ngOnInit(): void {
@@ -46,20 +46,25 @@ export class ViewFlightsComponent implements OnInit {
       var allDetails = sessionStorage.getItem('allDetails');
       if (allDetails) {
         this.allDetailsObj = JSON.parse(allDetails);
+        this.requiredFlightDetails.destination = this.allDetailsObj.endTo; // destination will be fetched from the session storage
+        this.requiredFlightDetails.startFrom = this.allDetailsObj.startFrom; // origin will // ending date will be fetched from the session storage   
+        this.requiredFlightDetails.fairType = this.allDetailsObj.fairType; // fair type will be fetched from the session storage
+        this.requiredFlightDetails.flightClass = this.allDetailsObj.bookingClass; // flight class will be fetched from the session storage
+        
         }
 
     this.departure = this.allDetailsObj.startFrom; // origin and destination both has to be fetched from the database
     this.destination = this.allDetailsObj.endTo; // origin and destination both has to be fetched from the database
     this.journeyDate = this.allDetailsObj.startDate; // start date will depend upon the transport and destination however as of now we are taking it from the session storage
-
+this.GetFlightDetails();
     }
-
+      
     // Fetch all the flight details using the service.ts method
     GetFlightDetails() {
       this._service.GetFlightDetails(this.requiredFlightDetails).subscribe(
         (data: IFlightDetails[]) => {
           this.allFlightDetailsArray = data;
-          console.log(this.allFlightDetailsArray);
+          console.log(data);
         },
         (error) => {
           console.error('Error fetching flight details:', error);

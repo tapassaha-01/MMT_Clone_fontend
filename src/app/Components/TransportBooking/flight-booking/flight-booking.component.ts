@@ -93,6 +93,7 @@ export class FlightBookingComponent implements OnInit {
     //calling to the service to book the flight ticket
     this._service.bookFlight(this.allDetailsObj).subscribe((res) => {
       console.log(res);
+      this.router.navigate(['/payment']);
     }, 
     
     (error) => {
