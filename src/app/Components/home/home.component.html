@@ -1,5 +1,5 @@
 @if (loginStatus) {
-    <app-customerbar></app-customerbar>
+    <app-customerbar [adminBool]="isAdmin"></app-customerbar>
 }
 @else {
     <app-commonbar></app-commonbar>
@@ -61,3 +61,18 @@
     </div>
 </div>
 
+<footer class="footer">
+  <div class="social-icons">
+    <img src="assets/footer/Instagram.png" alt="Instagram logo">
+    <img src="assets/footer/facebook.png" alt="Facebook logo">
+    <img src="assets/footer/Twitter.png" alt="Twitter logo">
+    <img src="assets/footer/WhatsApp.png" alt="WhatsApp logo">
+  </div>
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-info">
+    <p>Contact us: <a href="tel:1234567890">123-456-7890</a></p>
+    <p>© 2025 Travel Agency</p>
+  </div>
+</footer>

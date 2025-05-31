@@ -1,0 +1,70 @@
+  .admin-container {
+      height: 100vh;
+      background: linear-gradient(135deg, #0a1f44, #4868ae, #a1beea);
+      color: white;
+    }
+
+    .sidenav {
+      width: 180px;
+      background: linear-gradient(to bottom, #2150a1, #a4bbec);
+      color: white;
+      padding-top: 16px;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .nav-item {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .nav-item:hover {
+      background-color: rgba(255, 255, 255, 0.392);
+    }
+
+    .nav-item mat-icon {
+      margin-right: 8px;
+      color: rgb(255, 255, 255);
+    }
+
+    .topbar {
+      background: linear-gradient(to right, #264381, #a8c4ee);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: rgb(182, 217, 254);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .section {
+      background: rgba(236, 232, 232, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: white;
+    }
+
+    p {
+      color: #ffffff;
+    }
+    span{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: whitesmoke;
+    }

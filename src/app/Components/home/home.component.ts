@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   title = 'Demo Travel';
   selectedTransport: string = 'flight';
   loginStatus: boolean = false;
+  isAdmin: boolean = false;
+  user: any;
 
 
   loremArray: string[][] = [
@@ -40,10 +42,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
 
-      const temp = localStorage.getItem('jwtToken');
-
-      if (temp != null) {
+      var temp = localStorage.getItem('user');
+      if(temp != null){
+        this.user = JSON.parse(temp);
         this.loginStatus = true;
+        this.isAdmin = this.user.isAdmin === 'true';
       }
     }
   }

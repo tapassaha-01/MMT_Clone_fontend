@@ -1,0 +1,37 @@
+<div class="card-container">
+  <div class="stat-card">
+    <div class="card-title">Total Bookings</div>
+    <div class="card-value">1,245</div>
+  </div>
+  <div class="stat-card">
+    <div class="card-title">Total Users</div>
+    <div class="card-value">893</div>
+  </div>
+  <div class="stat-card">
+    <div class="card-title">Monthly Revenue</div>
+    <div class="card-value">₹2,34,000</div>
+  </div>
+</div>
+
+
+<div class="chart-grid" *ngIf="isBrowser">
+  <div class="chart-card">
+    <h3>Booking Trends</h3>
+    <canvas baseChart [data]="bookingTrends.data" [type]="bookingTrends.type"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>User Growth</h3>
+    <canvas baseChart [data]="userGrowth.data" [type]="userGrowth.type"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Revenue Comparison</h3>
+    <canvas baseChart [data]="revenueComparison.data" [type]="revenueComparison.type"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Category Distribution</h3>
+    <canvas baseChart [data]="categoryDistribution.data" [type]="categoryDistribution.type"></canvas>
+  </div>
+</div>

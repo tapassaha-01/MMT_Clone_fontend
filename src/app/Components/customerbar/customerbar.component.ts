@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -10,6 +10,8 @@ import { Router, RouterLink } from '@angular/router';
 export class CustomerbarComponent implements OnInit{
   title="Demo Travel App";
   userName: string='';
+
+  @Input() adminBool: boolean = false;
 
   constructor(private router: Router){}
 

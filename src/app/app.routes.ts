@@ -15,6 +15,7 @@ import { FlightBookingComponent } from './Components/TransportBooking/flight-boo
 import { TrainBookingComponent } from './Components/TransportBooking/train-booking/train-booking.component';
 import { ReviewBookingComponent } from './Components/review-booking/review-booking.component';
 import { WelcomeComponent } from './Components/welcome/welcome.component';
+import { ViewAdminComponent } from './Components/Admin/AdminControl/view-admin/view-admin.component';
 
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {path: 'signup', component: SignupComponent},
     {path: 'login', component: LoginComponent},
     {path: 'profile', component: ProfileComponent},
+    {path: 'admin', component: ViewAdminComponent},
     {path: 'payment', component: PaymentComponent},
     {path: 'reviewBooking', component: ReviewBookingComponent },
     {path: 'flight', component: FlightComponent},
