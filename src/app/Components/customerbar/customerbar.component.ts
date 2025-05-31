@@ -1,9 +1,10 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-customerbar',
-  imports: [RouterLink],
+  imports: [RouterLink, NgIf],
   templateUrl: './customerbar.component.html',
   styleUrl: './customerbar.component.css'
 })
@@ -11,13 +12,14 @@ export class CustomerbarComponent implements OnInit{
   title="Demo Travel App";
   userName: string='';
 
-  @Input() adminBool: boolean = false;
+  adminBool!: boolean;
 
   constructor(private router: Router){}
 
   ngOnInit(): void {
       var user = JSON.parse(localStorage.getItem('user') || '{}');
       this.userName = user.userName || ''; 
+      this.adminBool = user.admin; // Assuming user object has isAdmin property
   }
 
   OnLogout(): void {

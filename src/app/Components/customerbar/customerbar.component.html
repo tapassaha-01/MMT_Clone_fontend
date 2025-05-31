@@ -7,7 +7,7 @@
     <button>Hello {{userName}}</button>
     <div class="dropdown-content">
       <a href="#" routerLink="/profile">Profile</a>
-      <a href="#">Settings</a>
+      <a href="#" routerLink="/admin" *ngIf="adminBool">Admin Access</a>
       <a href="#" (click)="OnLogout()">Logout</a>
     </div>
   </div>

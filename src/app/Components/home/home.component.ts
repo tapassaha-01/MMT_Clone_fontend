@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   title = 'Demo Travel';
   selectedTransport: string = 'flight';
   loginStatus: boolean = false;
-  isAdmin: boolean = false;
   user: any;
 
 
@@ -46,7 +45,6 @@ export class HomeComponent implements OnInit {
       if(temp != null){
         this.user = JSON.parse(temp);
         this.loginStatus = true;
-        this.isAdmin = this.user.isAdmin === 'true';
       }
     }
   }
