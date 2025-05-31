@@ -14,9 +14,9 @@
           <mat-list-item (click)="selectSection('settings')" class="nav-item">
             <span>Settings</span>
           </mat-list-item>
-            <mat-list-item (click)="selectSection('logout')" class="nav-item">
-                <span>Logout</span>
-            </mat-list-item>
+          <mat-list-item routerLink="/home" class="nav-item">
+            <span>Home</span>
+          </mat-list-item>
         </mat-nav-list>
       </mat-sidenav>
 
@@ -40,10 +40,6 @@
         <div class="section" *ngIf="selectedSection === 'settings'">
           <h2>Settings</h2>
           <p>Placeholder for configuring settings that only admin should have access to</p>
-        </div>
-        <div class="section" *ngIf="selectedSection === 'logout'">
-          <h2>Logout</h2>
-          <p>This will directly logout the admin from the profile</p>
         </div>
       </mat-sidenav-content>
     </mat-sidenav-container>

@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewUserComponent } from "../view-user/view-user.component";
 import { ViewDashboardComponent } from "../view-dashboard/view-dashboard.component";
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-view-admin',
   imports: [
@@ -17,7 +18,8 @@ import { ViewDashboardComponent } from "../view-dashboard/view-dashboard.compone
     MatListModule,
     MatButtonModule,
     ViewUserComponent,
-    ViewDashboardComponent
+    ViewDashboardComponent,
+    RouterLink
 ],
   templateUrl: './view-admin.component.html',
   styleUrl: './view-admin.component.css'
