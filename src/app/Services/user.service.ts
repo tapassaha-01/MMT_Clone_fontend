@@ -15,6 +15,7 @@ export class UserService {
 
   baseUrl:string = "http://localhost:9090/MMT/"
   bookingUrl:string = "http://localhost:9090/MMT/Booking/"
+  otpUrl:string = "http://localhost:9090/otp/"
   adminUrl:string = "http://localhost:9090/MMT/Admin/"
 
   constructor(private http: HttpClient) { }
@@ -46,13 +47,13 @@ export class UserService {
   }
 
   // 03 - METHOD TO VERIFY OTP and register user
-  verifyOTP(otp: string, email: string): Observable<any>{
+  verifyOTP(otp: string, email: string): Observable<string>{
     const otpObj = {
       emailId: email,
       otp: otp
     };
     console.log(otpObj);
-    return this.http.post<any>(this.bookingUrl+"verifyTicketOtp", otpObj).pipe(catchError(this.errorHandler));
+    return this.http.post<any>(this.otpUrl+"otpVerify", otpObj).pipe(catchError(this.errorHandler));
 
   }
 
@@ -67,10 +68,10 @@ export class UserService {
   }
   
   // 06 - payment otp
-  generatePaymentOtp(form: FormGroup): Observable<string> {
-    const temp: Observable<string> = of('123456');
-    // this.http.post<string>('', form).pipe(catchError(this.errorHandler));
-    return temp;
+  generatePaymentOtp(email: string): Observable<string> {
+    const params = new HttpParams()
+      .set('emailId', email)
+     return this.http.post<string>(this.otpUrl+"otpGenerate", params, { responseType: 'json' as 'json' }).pipe(catchError(this.errorHandler));
   }
 
   // 07 - Update user profile

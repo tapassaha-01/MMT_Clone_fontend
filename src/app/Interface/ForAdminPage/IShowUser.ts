@@ -1,10 +1,10 @@
 import { IBookingHistory } from "./IBookingHistory"
 
 export interface IShowUser {
-    iD: number,
+    id: number,
     userName: string,
     email: string,
-    phoneNumber: number,
+    phoneNo: number,
     numOfBookingsMade: number
     bookingHistory: IBookingHistory[]
 }

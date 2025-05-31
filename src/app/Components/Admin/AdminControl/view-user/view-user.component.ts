@@ -9,10 +9,10 @@ import { IShowUser } from '../../../../Interface/ForAdminPage/IShowUser';
 })
 export class ViewUserComponent {
   userDetails: IShowUser = {
-    iD: 74,
+    id: 74,
     userName: 'vstshr',
     email: 'rtbrvth',
-    phoneNumber: 1424275275,
+    phoneNo: 1424275275,
     numOfBookingsMade: 0,
     bookingHistory: []
   }

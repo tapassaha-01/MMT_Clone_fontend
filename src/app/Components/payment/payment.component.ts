@@ -54,7 +54,7 @@ export class PaymentComponent implements OnInit{
   // Method to confirm payment
   OnPayment(_form: FormGroup){
     this.isLoading = true; // Set loading state to true
-    this._service.generatePaymentOtp(_form).subscribe(
+    this._service.generatePaymentOtp(this.payerEmail).subscribe(
       success=>{
         if(success){
           this.isLoading = false; // Set loading state to true
@@ -79,13 +79,13 @@ export class PaymentComponent implements OnInit{
         if (success) {
           alert('OTP verified: Payment done successfully');
           console.log('OTP verification success:', success);
-          this.router.navigate(['/homeview']);
+          this.router.navigate(['/reviewBooking']);
         }
       },
       error => {
         alert('OTP verification failed');
         console.error('OTP verification error:', error);
-        this.router.navigate(['/reviewBooking']);
+        this.router.navigate(['/bookFlight']);
       }
     );
     console.log('OTP is:', otp);
