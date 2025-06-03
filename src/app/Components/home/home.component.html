@@ -5,9 +5,6 @@
     <app-commonbar></app-commonbar>
 }
 <div class="body-div">
-    <div class="header">
-        <p>Advertisment bar</p>
-    </div>
     <div class="nav">
         <!-- each img tag below will be connected to different services -->
         <div [ngClass]="{'active': selectedTransport === 'flight'}" (click)="OnTransportSelection('flight')">
@@ -61,12 +58,27 @@
     </div>
 </div>
 
+
+@if(showLoginReminder && !loginStatus){
+    <div class="login-reminder-backdrop">
+    <div class="login-reminder-modal">
+        <h2>🔒 Kindly log in</h2>
+        <p>To continue accessing personalized features, please log in.</p>
+        <div class="login-reminder-buttons">
+        <button class="login-btn" routerLink="/login">Login Now</button>
+        <button class="later-btn" (click)="dismissReminder()">Later</button>
+        </div>
+    </div>
+    </div>
+}
+
 <footer class="footer">
   <div class="social-icons">
-    <img src="assets/footer/Instagram.png" alt="Instagram logo">
-    <img src="assets/footer/facebook.png" alt="Facebook logo">
-    <img src="assets/footer/Twitter.png" alt="Twitter logo">
-    <img src="assets/footer/WhatsApp.png" alt="WhatsApp logo">
+    <a href="https://www.instagram.com/djroy.1800?igsh=bjR6dzIyOWJiczRy" target="_blank" title="Follow us"><img src="assets/footer/Instagram.png" alt="Instagram logo"></a>
+    <a href="https://www.facebook.com/debjyoti.roy.31508?mibextid=ZbWKwL" target="_blank" title="Connect with us"><img src="assets/footer/facebook.png" alt="Facebook logo"></a>
+    <a href="https://x.com/DJRoy0108?t=a2ruJjhqIunfz8gQ9QZdXw&s=09" target="_blank" title="Don't miss the trend"><img src="assets/footer/Twitter.png" alt="Twitter logo"></a>
+    <a href="mailto: rdebjytoti@gmail.com" target="_blank" title="Mail us"><img src="assets/footer/gmail.png" alt="Gmail"></a>
+    <a href="#" target="_blank" title="Ping us"><img src="assets/footer/Whatsapp.png" alt="WhatsApp logo"></a>
   </div>
 
   <div class="footer-divider"></div>

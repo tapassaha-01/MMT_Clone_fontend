@@ -7,7 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewUserComponent } from "../view-user/view-user.component";
 import { ViewDashboardComponent } from "../view-dashboard/view-dashboard.component";
-import { RouterLink } from '@angular/router';
+import { CustomerbarComponent } from '../../../customerbar/customerbar.component';
+import { ViewAdsComponent } from "../view-ads/view-ads.component";
 @Component({
   selector: 'app-view-admin',
   imports: [
@@ -19,7 +20,8 @@ import { RouterLink } from '@angular/router';
     MatButtonModule,
     ViewUserComponent,
     ViewDashboardComponent,
-    RouterLink
+    CustomerbarComponent,
+    ViewAdsComponent
 ],
   templateUrl: './view-admin.component.html',
   styleUrl: './view-admin.component.css'

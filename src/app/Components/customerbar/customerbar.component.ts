@@ -1,10 +1,11 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AdsComponent } from "../ads/ads.component";
 
 @Component({
   selector: 'app-customerbar',
-  imports: [RouterLink, NgIf],
+  imports: [RouterLink, NgIf, AdsComponent],
   templateUrl: './customerbar.component.html',
   styleUrl: './customerbar.component.css'
 })

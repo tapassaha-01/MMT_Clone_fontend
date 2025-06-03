@@ -1,0 +1,47 @@
+
+/* Add bar css */
+.ad-slider {
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(to right, #0d1b2a, #1b263b);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.ad-track {
+  display: flex;
+  width: fit-content;
+  animation: scroll-ads 12s linear infinite;
+  align-items: center;
+}
+
+.ad-card {
+  flex-shrink: 0;
+  height: 60px;
+  padding-right: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.ad-card img {
+  height: 100%;
+  width: auto;
+  border-radius: 3px;
+  filter: brightness(0.95) drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+  margin-top: 8px;
+}
+
+.ad-card img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes scroll-ads {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

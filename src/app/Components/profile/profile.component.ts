@@ -4,11 +4,10 @@ import { UserService } from '../../Services/user.service';
 import { CommonModule } from '@angular/common';
 import { CustomerbarComponent } from "../customerbar/customerbar.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, CustomerbarComponent, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, CustomerbarComponent, ReactiveFormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -39,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
   profileUpdateForm!: FormGroup;
 
-  constructor(private _service: UserService, private fb: FormBuilder, private router: Router) {
+  constructor(private _service: UserService, private fb: FormBuilder) {
 
     // this.userEmail = <string>sessionStorage.getItem('email');
     // this.OnGetUserDetails();
@@ -84,6 +83,9 @@ export class ProfileComponent implements OnInit {
 
   updateProfileVariable(){
     this.profileUpdate = true;
+  }
+  cancelProfileUpdate(){
+    this.profileUpdate = false;
   }
 
   // 07 method in Service.ts

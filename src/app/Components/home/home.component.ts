@@ -8,10 +8,11 @@ import { TrainComponent } from "../Vehicles/train/train.component";
 import { BusComponent } from "../Vehicles/bus/bus.component";
 import { HotelComponent } from "../Vehicles/hotel/hotel.component";
 import { CabComponent } from "../Vehicles/cab/cab.component";
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, CommonbarComponent, FlightComponent, CustomerbarComponent, TrainComponent, BusComponent, HotelComponent, CabComponent],
+  imports: [CommonModule, CommonbarComponent, FlightComponent, CustomerbarComponent, TrainComponent, BusComponent, HotelComponent, CabComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   title = 'Demo Travel';
   selectedTransport: string = 'flight';
   loginStatus: boolean = false;
+  showLoginReminder: boolean = false;
   user: any;
 
 
@@ -36,7 +38,7 @@ export class HomeComponent implements OnInit {
 ];
 
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -47,6 +49,17 @@ export class HomeComponent implements OnInit {
         this.loginStatus = true;
       }
     }
+
+    setTimeout(() => {
+      if (!this.loginStatus) {
+        this.showLoginReminder = true;
+      }
+    }, 10000); // 5 seconds
+
+  }
+
+  dismissReminder() {
+    this.showLoginReminder = false;
   }
 
   OnTransportSelection(name: string) {
