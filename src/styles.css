@@ -99,3 +99,17 @@ h1, h2, h3, h4, h5, h6 {
   outline: none; /* Remove default focus outline */
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); /* Add a custom focus ring */
 }
+
+
+
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
