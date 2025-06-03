@@ -1,24 +1,59 @@
 <table>
-    <thead>
-        <tr>
-        <th>Index</th>
-        <th>User Id</th>
-        <th>User Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Number of bookings</th>
-        <th>Booking Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td>1</td>
-        <td>{{userDetails.id}}</td>
-        <td>{{userDetails.userName}}</td>
-        <td>{{userDetails.email}}</td>
-        <td>{{userDetails.phoneNo}}</td>
-        <td>{{userDetails.numOfBookingsMade}}</td>
-        <td><button class="table-btn">View Details</button></td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>User Name</th>
+      <th>User ID</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Number of bookings</th>
+      <th>Booking Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let user of usersList; let i = index">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phoneNo }}</td>
+        <td>{{ user.numOfBookingsMade }}</td>
+        <td>
+          <button class="table-btn" (click)="toggleDetails(i)">
+            {{ expandedRowIndex === i ? 'Hide Details' : 'View Details' }}
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="expandedRowIndex === i">
+        <td colspan="7">
+          <div class="details-box">
+            <div *ngFor="let booking of user.bookingHistory; let j = index">
+                <div>
+                    <p><strong>Booking {{ j + 1 }}:</strong></p>
+                    <p>Booking Date: {{ booking.bookingDate | date }}</p>
+                    <p>Number of passenger: {{ booking.numOfPassengers }}</p>
+                </div>
+                <div>
+                    <p>Booking Amount: {{ booking.price }}</p>
+                    <P>Flight Name: {{ booking.flightName }}</P>
+                    <p>Flight Class: {{ booking.flightClass }} </p>
+                </div>
+                <div>
+                    <p>Departure: {{ booking.startFrom }}</p>
+                    <p>Destination: {{ booking.destination }}</p>
+                    <p>Flight Date: {{ booking.departureDate | date }}</p>
+                    <p>Arrival Date: {{ booking.arrivalDate | date }}</p>
+                </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7">Total Users: {{ usersList.length }}</td>
+    </tr>
+  </tfoot>
 </table>

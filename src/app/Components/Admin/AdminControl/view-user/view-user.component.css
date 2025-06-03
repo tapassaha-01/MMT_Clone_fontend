@@ -67,3 +67,68 @@ th, td {
   transform: scale(0.98);
   background: linear-gradient(to right, #0f224b, #1f3a63);
 }
+
+
+
+/* Extended row view */
+.details-box {
+  background: linear-gradient(135deg, rgba(12, 18, 30, 0.85), rgba(24, 40, 72, 0.85));
+  color: #f0f4ff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.details-box > p {
+  margin-bottom: 0.75rem;
+  color: #aad4ff;
+}
+
+.details-box strong {
+  color: #8dc1ff;
+}
+
+/* Each booking block */
+.details-box > div {
+  display: flex;
+  gap: 5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Styling for each left/right column inside a booking */
+.details-box > div > div {
+  flex: 1 1 1 33%;
+  min-width: 100px;
+}
+
+.details-box p {
+  margin: 0.3rem 0;
+}
+
+
+
+
+
+/* Footer */
+table tfoot {
+  background: linear-gradient(to right, #14233c, #1f3552);
+  color: #f0f4ff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+table tfoot td {
+  padding: 0.75rem;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
