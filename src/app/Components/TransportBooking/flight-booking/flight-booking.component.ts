@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CustomerbarComponent } from "../../customerbar/customerbar.component";
 import { UserService } from '../../../Services/user.service';
 import { ITravelDetails } from '../../../Interface/ITravelDetails';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-flight-booking',
@@ -17,20 +19,21 @@ export class FlightBookingComponent implements OnInit {
   bookingForm!: FormGroup;
   allDetailsObj!: ITravelDetails;
   
-  constructor(private formBuilder: FormBuilder, private router: Router,private _service: UserService ) {
+  constructor(private formBuilder: FormBuilder, private router: Router,private _service: UserService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.bookingForm = this.formBuilder.group({
       startFrom: ['', Validators.required],
       endTo: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      passengerNum: ['', Validators.required],
+      passengerNum: ['', [Validators.required, Validators.min(1)]],
       emailId: ['', Validators.required],
       passengers: this.formBuilder.array([this.createPassengerGroup()])
     });    
   }
 
   ngOnInit(): void {
-    var allDetails = sessionStorage.getItem('allDetails');
+    if(isPlatformBrowser(this.platformId)){
+    const allDetails = sessionStorage.getItem('allDetails');
     if (allDetails) {
       this.allDetailsObj = JSON.parse(allDetails);
 
@@ -43,6 +46,7 @@ export class FlightBookingComponent implements OnInit {
         emailId:[this.allDetailsObj.emailId],// depend upon how many seats left,
         passengers: this.formBuilder.array([this.createPassengerGroup()])
       });
+    }
     }
   }
 

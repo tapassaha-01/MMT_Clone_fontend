@@ -1,252 +1,133 @@
-.signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    min-height: calc(100vh - 50px);
-    position: relative;
- }
- 
- .signup-frame {
-    min-height: 250px;
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-    max-width: 750px;
-    background-color: rgba(255, 255, 255, 0.311);
-    border-radius: 1rem;
-    padding: 1rem;
-    gap: 1rem;
-    z-index: 100;
-    color: white;
-    /* background: linear-gradient(145deg, #fffbff, #d7d4e1); */
- }
- 
- .form-header{
-    text-align: left;
-    padding-inline-start: 1.25rem;
-    font-weight: 900;
-    font-size: 2rem;
-    
-    margin-block: 0.5em;
- }
- 
- .bubble {
-    width: 75%;
- }
- 
- .d-block {
-    display: block;
- }
- 
- .picture-container {
-    height: 100px;
-    position: relative;
-    flex-wrap: wrap;
-    background-color: none;
- }
- 
- .picture-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-block-end: 1rem;
- }
- 
-.invalid-input{
-   color: red;
-   
+/* Structural fixes and enhancements */
+.main-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #1a2a6c, #1e3c72, #2a5298);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(42, 82, 152, 0.4);
 }
 
- .picture-frame {
-    display: flex;
-    align-items: center;
- }
- 
- .picture-frame {
-    height: 100px;
-    width: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
- }
- 
- .picture-frame img {
-    transition: scale 0.5s ease-in-out, filter 0.5s ease-in-out;
-    width: 100%;
-    height: 100%;
- }
- 
- .picture-frame:hover img {
-    scale: 1.1;
-    filter: brightness(90%);
- }
- 
- .picture-frame::before {
-    text-align: center;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    inset: auto;
-    z-index: 1;
- }
- 
- .arrow {
-    font-size: 3rem;
-    color: var(--bs-gray-500);
- }
- .arrow:hover{
-    color: var(--bs-gray-900);
- }
- 
- 
- .form-frame {
-    gap: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bs-gray-100-transparent-color);
-    border-radius: 1rem;    
-    padding: 0.5rem;
-    position: relative;
- }
- 
- .label-input-div-container {
-    gap: 5px;
-    display: grid;
-    padding-bottom: 5px;
-    grid-template-columns: 1fr 1fr;
- }
- 
- @media (width < 700px) {
-    .label-input-div-container {
-        display: flex;
-        flex-direction: column;
-    }
- 
-    .choose-picture-frame {
-        height: 500px !important;
-    }
- }
- 
- .label-input-div {
-    border-radius: 0.25rem;
-    padding-inline: 0.5rem;
- }
- 
- .form-font {
-    
-    padding-block: 0.25rem;
-    padding-inline: 0.25rem;
- }
- .form-font::after{
-    content: '*';
-    color: var(--danger);
- }
- 
- .form-input {
-    width: 100%;
-    background-color: var(--bs-gray-300-transparent-color);
-    border: 0;
-    outline: 2px solid var(--bs-gray-400);
-    min-height: 2rem;
-    border-radius: 0.25rem;
-    padding-inline: 0.25rem;
- }
- 
- .form-input[type="date"] {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
- }
- 
- .form-input:focus {
-    outline: 2px solid var(--bs-chat-primary-bg);
- }
- 
- .submit-button {
-    background-color: rgba(242, 251, 201, 0.452);
-    color: var(--light);
-    padding-block: 0.5rem;
-    padding-inline: 1rem;
-    border-radius: 24px;
-    font-size: 0.8rem;
-    box-shadow: 1px 1px 2px 0px #9270db93;
-    border: 0;
-    min-width: 40%;
-    margin-block: 0.5rem;
-    position: relative;
-    transition: font-size 0.5s ease-in-out;
-    min-height: 2rem;
- }
- .submit-button:disabled{
-    background-color: rgb(101, 102, 142);
- }
- 
- .submit-button-container {
-    display: flex;
-    justify-content: center;
- }
- 
- 
- ::-webkit-scrollbar {
-    display: none;
- }
- 
- .background-blob{
-    position: absolute;
-    width: 100%;
-    height: 100%;    
-    left: 0;
- }
- #shape-blob{
-    position: relative;
-    left: 0;
- }
- .validation-Confirmation {
-    padding: 0.25rem;
-    
-    color: var(--danger);
- }
- .already-a-member{
-    text-align: center;
-    
-    color: var(--bs-gray-900);
- }
- .already-a-member a{
-    font-weight: 800;
-    color: var(--bs-gray-900);
- }
- .already-a-member a:hover{
-    color: var(--bs-gray-600);
- }
+/* Headings */
+.main-container h2, 
+.main-container h3,
+.main-container h4 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  grid-column: span 3;
+}
+
+/* Primary form layout */
+.main-container form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Full width divider or buttons */
+hr, .form-actions, .submit-button-container {
+  grid-column: span 3;
+}
+
+/* Form group styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #64748b;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #60a5fa;
+  outline: none;
+}
+
+/* Error messages */
+.invalid-input, .error {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  margin-top: 4px;
+}
+
+/* Passenger Details Section */
+[formArrayName="passengers"] {
+  grid-column: span 3; /* Makes the section span the full form width */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+[formArrayName="passengers"] > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Matches the main form layout */
+  gap: 24px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+[formArrayName="passengers"] h4 {
+  grid-column: span 3;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
 
 
- .gender-select {
-   width: 100%;
-   padding: 10px 12px;
-   font-size: 16px;
-   border: 1px solid #ccc;
-   border-radius: 6px;
-   background-color: #f9f9f9;
-   appearance: none;
-   -webkit-appearance: none;
-   -moz-appearance: none;
-   background-image: url('data:image/svg+xml;utf8,<svg fill="%23007BFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-   background-repeat: no-repeat;
-   background-position: right 12px center;
-   background-size: 18px;
-   cursor: pointer;
-   transition: border-color 0.3s ease, box-shadow 0.3s ease;
- }
- 
- .gender-select:focus {
-   border-color: #007BFF;
-   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-   outline: none;
- }
- 
+/* Submit and action buttons */
+.form-actions, .submit-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
 
+.update-button,
+.cancel-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
 
+.update-button {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
 
+.update-button:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: scale(1.03);
+}
 
+.cancel-btn {
+  background-color: #cbd5e1;
+  color: #1e293b;
+  box-shadow: 0 2px 6px rgba(100, 116, 139, 0.3);
+}
+
+.cancel-btn:hover {
+  background-color: #94a3b8;
+  transform: scale(1.03);
+}

@@ -2,17 +2,27 @@
 <div class="main-container">
     <div>
         <h3>From {{departure}} to {{destination}}</h3>
-        <h6>Details for flights on {{journeyDate | date: 'shortDate'}}</h6>
+        <h6>Details for flights on and from {{journeyDate | date: 'shortDate'}}</h6>
     </div>
     @if(allFlightDetailsArray.length>0){
         <table>
+            <thead>
+                <tr>
+                    <td>Company</td>
+                    <td>Departure Date</td>
+                    <td>Arrival Date</td>
+                    <td>Travel Time</td>
+                    <td>Flight class</td>
+                    <td>Fair Type</td>
+                    <td>Price</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
             <tbody>
                 <tr *ngFor="let item of allFlightDetailsArray">
                     <th>{{item.planeCompanyName | titlecase }}</th>
-                    <th>{{item.departureDate | date: 'shortTime'}}</th>
+                    <th>{{item.departureDate | date: 'shortDate'}}</th>
                     <th>{{item.arrivalDate | date: 'shortTime'}}</th>
-                    <th>{{item.startFrom | titlecase }}</th>
-                    <th>{{item.destination | titlecase }}</th>
                     <th>{{item.travelTime}}</th>
                     <th>{{item.flightClass | titlecase }}</th>
                     <th>{{item.fairType | titlecase }}</th>

@@ -2,6 +2,8 @@ import { NgIf } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AdsComponent } from "../ads/ads.component";
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-customerbar',
@@ -15,12 +17,15 @@ export class CustomerbarComponent implements OnInit{
 
   adminBool!: boolean;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object){}
 
   ngOnInit(): void {
-      var user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if (isPlatformBrowser(this.platformId)) {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
       this.userName = user.userName || ''; 
       this.adminBool = user.admin; // Assuming user object has isAdmin property
+    }
   }
 
   OnLogout(): void {

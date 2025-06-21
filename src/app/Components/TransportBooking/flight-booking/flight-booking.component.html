@@ -1,63 +1,56 @@
 <app-customerbar></app-customerbar>
-<div class="signup-container">
-    <div class="signup-frame">
-        <h2 class="form-header">Booking Details</h2>
+<div class="main-container">
+        <h2>Booking Details</h2>
         <form [formGroup]="bookingForm" (ngSubmit)="OnBooking(bookingForm)">
 
             <!-- FLIGHT DETAILS THAT WILL BE FETCHED FROM SESSION STORAGE -->
             <h3>Flight Details</h3>
-            <div class="label-input-div-container">
                 <!-- startFrom/departure -->
-                <div class="label-input-div">
+                <div class="form-group">
                     <label class="form-font">Departure</label>
                     <input type="text" formControlName="startFrom" class="form-input" readonly>
                 </div>
 
                 <!-- endTo/destination -->
-                <div class="label-input-div">
+                <div class="form-group">
                     <label class="form-font">Destination</label>
                     <input type="text" formControlName="endTo" class="form-input" readonly>                    
                 </div>
-            </div>
             
 
-            <div class="label-input-div-container">
                 <!-- starting date -->
-                <div class="label-input-div">
+                <div class="form-group">
                     <label class="form-font">Boarding Date</label>
                     <input type="date" formControlName="startDate" class="form-input" readonly>
                 </div>
 
                 <!-- ending date -->
-                <div class="label-input-div">
+                <div class="form-group">
                     <label class="form-font">Reaching Destination on</label>
                     <input type="date" formControlName="endDate" class="form-input" readonly>
                 </div>
-            </div>
 
-            <div class="label-input-div-container">
                 <!-- passengerNumber -->
-                <div class="label-input-div">
+                <div class="form-group">
                     <label class="form-font">Number of passengers</label>
                     <input type="number" formControlName="passengerNum" class="form-input" (input)="onNumberOfPassengersChange(bookingForm.get('passengerNum')?.value)">
                     @if (bookingForm.controls['passengerNum'].touched || bookingForm.controls['passengerNum'].dirty) {
                         <small *ngIf="bookingForm.controls['passengerNum'].errors?.['required']" class="invalid-input">Please provide the number of passengers!</small>
+                        <small *ngIf="bookingForm.controls['passengerNum'].errors?.['min']" class="invalid-input">Number of passengers must be at least 1.</small>
                     }
                 </div>
                 <!-- Email -->
-                <div class="label-input-div">
+                <div class="form-group">
                     <label class="form-font">Email Id</label>
                     <input type="email" formControlName="emailId" class="form-input" >
                 </div>
-            </div>
             <hr />
 
             <!-- PASSENGER DETAILS -->
             <div formArrayName="passengers">
                 <div *ngFor="let passenger of passengers.controls; let i = index" [formGroupName]="i">
                   <h4>Passenger {{ i + 1 }}</h4>
-                  <div class="label-input-div-container">
-                    <div class="label-input-div">
+                      <div class="form-group">
                         <!-- Passenger name -->
                         <label>Name:</label>
                         <input type="text" formControlName="name" class="form-input"/>
@@ -66,7 +59,7 @@
                         </div>
                       </div>
     
-                      <div class="label-input-div">
+                      <div class="form-group">
                         <!-- Phone Number -->
                         <label>Phone No:</label>
                         <input type="number" formControlName="phoneNo" class="form-input">
@@ -74,9 +67,8 @@
                                 Phone number is required
                         </div>
                       </div>
-                  </div>
-                  <div class="label-input-div-container">
-                    <div class="label-input-div">
+                      
+                    <div class="form-group">
                         <!-- Addhar Card -->
                         <label>Addhar Card:</label>
                         <input type="number" formControlName="addharNo" class="form-input">
@@ -85,7 +77,7 @@
                         </div>
                       </div>
     
-                      <div class="label-input-div">
+                      <div class="form-group">
                         <!-- Age -->
                         <label>Age:</label>
                         <input type="number" formControlName="age" class="form-input"/>
@@ -93,9 +85,9 @@
                             Age is required and must be 0 or above.
                         </div>
                       </div>
-                  </div>
-                  <div class="label-input-div-container">
-                    <div class="label-input-div">
+                      
+                      
+                    <div class="form-group">
                         <!-- BirthDate -->
                         <label>Birthdate:</label>
                         <input type="date" formControlName="birthdate" class="form-input"/>
@@ -104,7 +96,7 @@
                         </div>
                       </div>
     
-                      <div class="label-input-div">
+                      <div class="form-group">
                         <!-- Gender -->
                         <label>Gender:</label>
                         <select formControlName="gender" class="gender-select">
@@ -117,9 +109,7 @@
                             Gender is required.
                         </div>
                       </div>
-                  </div>
-                  <div class="label-input-div-container">
-                    <div class="label-input-div">
+                    <div class="form-group">
                         <!-- nationality -->
                         <label>Nationality:</label>
                         <input type="text" formControlName="nationality" class="form-input"/>
@@ -127,14 +117,10 @@
                             Nationality is required.
                         </div>
                       </div>
-                  </div>
                   <hr />
                 </div>
               </div>
-
-            <div class="submit-button-container">
-                <button type="submit" class="submit-button" [disabled]="bookingForm.invalid">Submit Details</button>
-            </div>
+                
+            <button type="submit" class="update-button" [disabled]="bookingForm.invalid">Submit the details</button>
         </form>
-    </div>
 </div>
