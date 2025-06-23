@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
 
   profileUpdate: boolean = false;
   profilePicUpdate: boolean = false;
+  selectedFile: File | null = null;
 
   profilePicList: string[] = [
     "/assets/ProfileAvatars/pic1.jpg",
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  // These two are for updating the profile
   updateProfileVariable(){
     this.profileUpdate = true;
   }
@@ -103,14 +105,29 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  // THESE TWO ARE FOR UPDATING THE PROFILE PIC
   // Update profile pic
   UpdateProfilePic(){
     this.profilePicUpdate = !this.profilePicUpdate;
   }
 
-  // Set profile pic
+  // Set profile pic // ******************************************************* HAVE TO UPDATE THIS METHOD SO THAT IT CAN UPDATE BOTH AVATAR PICS AND UPLOADED PICS 
   SetProfilePic(pic: string){
     this.profilePic = pic;
     this.profilePicUpdate = false;
   }
+
+  // This method and the method just above needs to be meerged into one method that can handle 
+  // both avatar selection [which is currently in string] and file upload [which is in file format]
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.profilePicUpdate = false; // close the profile pic update modal
+      this.profilePic = URL.createObjectURL(this.selectedFile); // preview if needed
+    }
+  }
+
+
+
 }
