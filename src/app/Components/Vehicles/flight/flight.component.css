@@ -140,3 +140,43 @@ input[type="number"]:focus {
   background-color: #ffe5e5; /* Light red background */
   color: #000; /* Optional: change text color for readability */
 }
+
+
+
+
+.input-wrapper {
+  position: relative;
+  display: inline-block; /* shrink to fit the input */
+  width: 100%;
+  max-width: 250px; /* Adjust to match your input width */
+}
+
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0; /* match input width */
+  background: white;
+  border: 1px solid #ccc;
+  color: black;
+  font-weight: 100;
+  font-size: small;
+  border-top: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.suggestion-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.suggestion-list li:hover {
+  background-color: #f0f0f0;
+}

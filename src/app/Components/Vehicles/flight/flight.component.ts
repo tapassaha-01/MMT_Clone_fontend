@@ -4,6 +4,8 @@ import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, Form
 import { Router } from '@angular/router';
 import { ITravelDetails } from '../../../Interface/ITravelDetails';
 import { UserService } from '../../../Services/user.service';
+import { ElementRef, ViewChild, HostListener, AfterViewInit } from '@angular/core';
+import { debounceTime } from 'rxjs';
 
 
 @Component({
@@ -14,46 +16,96 @@ import { UserService } from '../../../Services/user.service';
 })
 export class FlightComponent implements OnInit {
 
-  private _service = inject(UserService);
-  
+  //#region => Dependency Injection
+    private _service = inject(UserService);
+    private formBuilder = inject(FormBuilder);
+    private route = inject(Router);
 
-  searchFlightForm!: FormGroup;
-  travelClass: string[] = ['Business', 'First Class', 'Economy', 'Premium Economy'];
-  allDetails: ITravelDetails={
-    startFrom: '',
-    endTo: '',
-    startDate: new Date(),
-    endingDate: new Date(),
-    passengerNo: 0,
-    bookingClass: '',
-    fairType: '',
-    emailId: '',
-    passengers: [],
-    bookingDate: new Date()
-  }
+    //#endregion
 
-  constructor(private formBuilder: FormBuilder, private route: Router){
+  //#region -> Variables and Form Controls
+    listOfCities: string[] = [
+      'New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix',
+      'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose',
+      'Austin', 'Jacksonville', 'Fort Worth', 'Columbus', 'Charlotte',
+      'Indianapolis', 'Seattle', 'Denver', 'Washington, D.C.', 'Boston',
+      'El Paso', 'Nashville', 'Detroit', 'Oklahoma City', 'Portland',
+      'Las Vegas', 'Louisville', 'Baltimore', 'Milwaukee', 'Albuquerque'
+    ];
+    suggestedDepartures: string[] = [];
+    suggestedDestinations: string[] = [];
 
-      this.searchFlightForm = this.formBuilder.group({
-        departure: ['', [Validators.required]],
-        destination: ['', [Validators.required]],
-        journeyDate: ['', [Validators.required, CheckJourneyDate]],
-        returnDate: [''],
-        numOfPassenger: [1, [Validators.required]],
-        travelClass: ['', [Validators.required]],
-        fare: ['', [Validators.required]]
-      },
-      {
-        validators: [CheckReturnDate, CheckDestination]
-      } as AbstractControlOptions
-    );
-  } 
+    dept = new FormControl('', Validators.required);
+    dest = new FormControl('', Validators.required);
+
+    searchFlightForm!: FormGroup;
+    travelClass: string[] = ['Business', 'First Class', 'Economy', 'Premium Economy'];
+    allDetails: ITravelDetails={
+      startFrom: '',
+      endTo: '',
+      startDate: new Date(),
+      endingDate: new Date(),
+      passengerNo: 0,
+      bookingClass: '',
+      fairType: '',
+      emailId: '',
+      passengers: [],
+      bookingDate: new Date()
+    }
+  //#endregion
+
+  //#region -> Constructor and ngOnInit
+    constructor(){
+
+        this.searchFlightForm = this.formBuilder.group({
+          departure: this.dept,
+          destination: this.dest,
+          journeyDate: ['', [Validators.required, CheckJourneyDate]],
+          returnDate: [''],
+          numOfPassenger: [1, [Validators.required]],
+          travelClass: ['', [Validators.required]],
+          fare: ['', [Validators.required]]
+        },
+        {
+          validators: [CheckReturnDate, CheckDestination]
+        } as AbstractControlOptions
+      );
+    }
+    
 
   ngOnInit(): void {
+      // this.FetchAllCities();
+
+    this.dept.valueChanges
+    .pipe(debounceTime(200))
+    .subscribe(value => this.filterDepartureCities(value ?? ''));
+
+  this.dest.valueChanges
+    .pipe(debounceTime(200))
+    .subscribe(value => this.filterDestinationCities(value ?? ''));
+
   }
 
+  //#endregion
 
-// these methods are alsoo not complete, as there are no methods in service.ts thus printing it in console
+  //#region -> OUTSIDE CLICK HANDLER
+  // This method is used to close the dropdown when clicking outside of it
+
+    @ViewChild('dropdownWrapper') dropdownWrapper!: ElementRef;
+
+    @HostListener('document:click', ['$event.target'])
+    onClickOutside(targetElement: HTMLElement) {
+      if (this.dropdownWrapper && !this.dropdownWrapper.nativeElement.contains(targetElement)) {
+        this.suggestedDepartures = [];
+        this.suggestedDestinations = [];
+      }
+    }
+
+  //#endregion
+
+  //#region => METHODS
+
+  // these methods are also not complete, as there are no methods in service.ts thus printing it in console
   OnSearchTransport(_form: FormGroup){
     // chechikng if any fields are empty
     if (this.searchFlightForm.invalid) {
@@ -77,15 +129,56 @@ export class FlightComponent implements OnInit {
     this.route.navigate(['/viewFlight']);
   }
 
-  // isFieldInvalid(fieldName: string): boolean {
-  //   const field = this.searchFlightForm.get(fieldName);
-  //   return field?.invalid && field?.touched || false;
-  // }
+  // METHOD FOR city filtering in the dropdown
+  filterDepartureCities(query: string) {
+    if (!query) {
+      this.suggestedDepartures = this.listOfCities; // Show first 5 cities if query is empty
+      return;
+    }
+    this.suggestedDepartures = this.listOfCities
+      .filter(city => city.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  filterDestinationCities(query: string) {
+    if (!query) {
+      this.suggestedDestinations = this.listOfCities; // Show first 5 cities if query is empty
+      return;
+    }
+    this.suggestedDestinations = this.listOfCities
+      .filter(city => city.toLowerCase().includes(query.toLowerCase()));
+  }
+
+
+  // Method for fetching all the cities from the service
+  FetchAllCities(): void {
+    this._service.FetchAllCities().subscribe(
+      success=>{
+        this.listOfCities = success;
+      },
+      error=>{
+        console.error("Error fetching cities: ", error);
+      }
+    )
+  }
+
+  // METHOD FOR SELECTING SUGGESTION FROM AUTOCOMPLETE and cleaening the dropdown
+  selectDeparture(city: string) {
+    this.dept.setValue(city, { emitEvent: false });
+    this.suggestedDepartures = [];
+  }
+
+  selectDestination(city: string) {
+    this.dest.setValue(city, { emitEvent: false });
+    this.suggestedDestinations = [];
+  }
+
+
+//#endregion
 
 }
 
 
-// CHECK FUNCTIONS
+//#region  -> CUSTOM VALIDATIONS = CHECK FUNCTIONS
 
 export function CheckJourneyDate(control: FormControl): ValidationErrors | null {
   var today = new Date();
@@ -128,3 +221,5 @@ export function CheckDestination(control: AbstractControl): ValidationErrors | n
 
   return null;
 }
+
+//#endregion

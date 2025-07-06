@@ -1,17 +1,53 @@
 <form [formGroup]="searchFlightForm" (ngSubmit)="OnSearchTransport(searchFlightForm)">
     <div class="form-group">
-        <div class="box">From<br>
+        <div class="box">
+            <label>From</label>
 
-            <!-- departure -->
-            <input type="text" formControlName="departure" placeholder="Enter a Departure">
+            <div class="input-wrapper" #dropdownWrapper>
+                <input
+                type="text"
+                formControlName="departure"
+                [formControl]="dept"
+                placeholder="Enter a Departure"
+                />
+
+                <!-- Suggestion List -->
+                <ul *ngIf="suggestedDepartures.length > 0" class="suggestion-list">
+                <li *ngFor="let suggestion of suggestedDepartures" (click)="selectDeparture(suggestion)">
+                    {{ suggestion }}
+                </li>
+                </ul>
+            </div>
+
+            <!-- Validation Message -->
             @if (searchFlightForm.controls['departure'].touched || searchFlightForm.controls['departure'].dirty) {
                 <small *ngIf="searchFlightForm.controls['departure'].errors?.['required']">Provide a departure</small>
             }
         </div>
 
+
+
         <!-- destination -->
-        <div class="box">To<br>
-            <input type="text" formControlName="destination" placeholder="Enter a Destination">
+        <div class="box">
+            <label>To</label>
+
+            <div class="input-wrapper" #dropdownWrapper>
+                <input
+                type="text"
+                formControlName="destination"
+                [formControl]="dest"
+                placeholder="Enter a Destination"
+                />
+
+                <!-- Suggestion List -->
+                <ul *ngIf="suggestedDestinations.length > 0" class="suggestion-list">
+                <li *ngFor="let suggestion of suggestedDestinations" (click)="selectDestination(suggestion)">
+                    {{ suggestion }}
+                </li>
+                </ul>
+            </div>
+
+            <!-- Validation Message -->
             @if (searchFlightForm.controls['destination'].touched || searchFlightForm.controls['destination'].dirty) {
                 <small *ngIf="searchFlightForm.controls['destination'].errors?.['required']">Provide a destination</small><br>
                 <small *ngIf="searchFlightForm.errors?.['depurtureError']">{{searchFlightForm.errors?.['depurtureError'].message}}</small>

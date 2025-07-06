@@ -85,6 +85,13 @@ export class UserService {
     return this.http.post<IFlightDetails[]>(this.adminUrl + 'getFlightDetails', flightDetails).pipe(catchError(this.errorHandler));
   }
 
+ // 09 - FetchAllCities
+ FetchAllCities(): Observable<string[]> {
+  return this.http.get<string[]>('getAllFlights').pipe(catchError(this.errorHandler));
+ }
+
+
+
   // ERROR HANDLER METHOD
   // This method is used to handle errors from the server and return a user-friendly message.
   errorHandler(error: HttpErrorResponse){
