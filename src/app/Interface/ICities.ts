@@ -1,4 +1,4 @@
 export interface ICities {
     destination: string[];
-    departure: string[];
+    startFrom: string[];
 }

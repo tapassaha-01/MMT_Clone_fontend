@@ -27,7 +27,7 @@ export class FlightComponent implements OnInit {
   //#region -> Variables and Form Controls
     listOfCities: ICities = {
       destination: [],
-      departure: []
+      startFrom: []
     };
     suggestedDepartures: string[] = [];
     suggestedDestinations: string[] = [];
@@ -71,7 +71,7 @@ export class FlightComponent implements OnInit {
     
 
   ngOnInit(): void {
-      // this.FetchAllCities();
+    this.FetchAllCities();
 
     this.dept.valueChanges
     .pipe(debounceTime(200))
@@ -129,10 +129,10 @@ export class FlightComponent implements OnInit {
   // METHOD FOR city filtering in the dropdown
   filterDepartureCities(query: string) {
     if (!query) {
-      this.suggestedDepartures = this.listOfCities.departure; // Show first 5 cities if query is empty
+      this.suggestedDepartures = this.listOfCities.startFrom; // Show first 5 cities if query is empty
       return;
     }
-    this.suggestedDepartures = this.listOfCities.departure
+    this.suggestedDepartures = this.listOfCities.startFrom
       .filter(city => city.toLowerCase().includes(query.toLowerCase()));
   }
 
