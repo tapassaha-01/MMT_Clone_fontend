@@ -5,6 +5,7 @@ import { catchError, Observable, of, throwError } from 'rxjs';
 import { IUser } from '../Interface/IUser';
 import { ITravelDetails } from '../Interface/ITravelDetails';
 import { IFlightDetails } from '../Interface/IFlightDetails';
+import { ICities } from '../Interface/ICities';
 
 @Injectable({
   providedIn: 'root'
@@ -86,8 +87,8 @@ export class UserService {
   }
 
  // 09 - FetchAllCities
- FetchAllCities(): Observable<string[]> {
-  return this.http.get<string[]>('getAllFlights').pipe(catchError(this.errorHandler));
+ FetchAllCities(): Observable<ICities> {
+  return this.http.get<ICities>('').pipe(catchError(this.errorHandler));
  }
 
 

@@ -6,6 +6,7 @@ import { ITravelDetails } from '../../../Interface/ITravelDetails';
 import { UserService } from '../../../Services/user.service';
 import { ElementRef, ViewChild, HostListener, AfterViewInit } from '@angular/core';
 import { debounceTime } from 'rxjs';
+import { ICities } from '../../../Interface/ICities';
 
 
 @Component({
@@ -24,14 +25,10 @@ export class FlightComponent implements OnInit {
     //#endregion
 
   //#region -> Variables and Form Controls
-    listOfCities: string[] = [
-      'New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix',
-      'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose',
-      'Austin', 'Jacksonville', 'Fort Worth', 'Columbus', 'Charlotte',
-      'Indianapolis', 'Seattle', 'Denver', 'Washington, D.C.', 'Boston',
-      'El Paso', 'Nashville', 'Detroit', 'Oklahoma City', 'Portland',
-      'Las Vegas', 'Louisville', 'Baltimore', 'Milwaukee', 'Albuquerque'
-    ];
+    listOfCities: ICities = {
+      destination: [],
+      departure: []
+    };
     suggestedDepartures: string[] = [];
     suggestedDestinations: string[] = [];
 
@@ -132,20 +129,20 @@ export class FlightComponent implements OnInit {
   // METHOD FOR city filtering in the dropdown
   filterDepartureCities(query: string) {
     if (!query) {
-      this.suggestedDepartures = this.listOfCities; // Show first 5 cities if query is empty
+      this.suggestedDepartures = this.listOfCities.departure; // Show first 5 cities if query is empty
       return;
     }
-    this.suggestedDepartures = this.listOfCities
+    this.suggestedDepartures = this.listOfCities.departure
       .filter(city => city.toLowerCase().includes(query.toLowerCase()));
   }
 
   filterDestinationCities(query: string) {
     if (!query) {
-      this.suggestedDestinations = this.listOfCities; // Show first 5 cities if query is empty
+      this.suggestedDestinations = this.listOfCities.destination; // Show first 5 cities if query is empty
       return;
     }
-    this.suggestedDestinations = this.listOfCities
-      .filter(city => city.toLowerCase().includes(query.toLowerCase()));
+    this.suggestedDestinations = this.listOfCities.destination
+    .filter(city => city.toLowerCase().includes(query.toLowerCase()));
   }
 
 
