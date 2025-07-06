@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
       success=>{
         if(success){
           this.isLoading = false; // Set loading state to true
-          alert("User signup successful");
+          alert("Otp has been send");
           console.log("OTP : ",success)
           // this.router.navigate(['/login']);
           console.log(success);
@@ -69,11 +69,11 @@ getOtpValue(): string {
   const otp = Object.values(this.otpForm.value).join('');
   this._service.verifyOTP(otp,this.signupForm.value.emailName).subscribe(
     success => {
-      if (success) {
+      // if (success.length>0) {
         alert('OTP verified successfully');
-        console.log('OTP verification success:', success);
+        console.log( success);
         this.router.navigate(['/login']);
-      }
+      // }
     },
     error => {
       alert('OTP verification failed');

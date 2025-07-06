@@ -47,13 +47,13 @@ export class UserService {
   }
 
   // 03 - METHOD TO VERIFY OTP and register user
-  verifyOTP(otp: string, email: string): Observable<string>{
+  verifyOTP(otp: string, email: string): Observable<{msg:string}>{
     const otpObj = {
       emailId: email,
       otp: otp
     };
     console.log(otpObj);
-    return this.http.post<any>(this.otpUrl+"otpVerify", otpObj).pipe(catchError(this.errorHandler));
+    return this.http.post<{msg:string}>(this.otpUrl+"otpVerify", otpObj).pipe(catchError(this.errorHandler));
 
   }
 
