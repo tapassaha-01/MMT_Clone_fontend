@@ -1,4 +1,9 @@
-<app-customerbar></app-customerbar>
+@if (loginStatus) {
+    <app-customerbar></app-customerbar>
+}
+@else {
+    <app-commonbar></app-commonbar>
+}
 <div class="main-container">
     <div>
         <h3>From {{departure}} to {{destination}}</h3>

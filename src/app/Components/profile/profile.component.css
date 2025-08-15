@@ -44,8 +44,8 @@
 }
 
 .update {
-  margin-top: 20px;
-  padding: 10px 20px;
+  margin: 20px;
+  padding: 10px;
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white;
   border: none;
@@ -55,7 +55,8 @@
 }
 
 .update:hover {
-  background-color: #1d4ed8;
+  background: white;
+  color: #3b82f6;
 }
 
 .image-container {

@@ -71,15 +71,17 @@ export class FlightComponent implements OnInit {
     
 
   ngOnInit(): void {
-    this.FetchAllCities();
+    setTimeout(() => {
+      this.FetchAllCities();
+      }, 2000);
 
     this.dept.valueChanges
-    .pipe(debounceTime(200))
-    .subscribe(value => this.filterDepartureCities(value ?? ''));
+      .pipe(debounceTime(200))
+      .subscribe(value => this.filterDepartureCities(value ?? ''));
 
-  this.dest.valueChanges
-    .pipe(debounceTime(200))
-    .subscribe(value => this.filterDestinationCities(value ?? ''));
+    this.dest.valueChanges
+      .pipe(debounceTime(200))
+      .subscribe(value => this.filterDestinationCities(value ?? ''));
 
   }
 

@@ -22,7 +22,7 @@ export class CustomerbarComponent implements OnInit{
   ngOnInit(): void {
 
     if (isPlatformBrowser(this.platformId)) {
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const user = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.userName = user.userName || ''; 
       this.adminBool = user.admin; // Assuming user object has isAdmin property
     }
@@ -32,7 +32,7 @@ export class CustomerbarComponent implements OnInit{
     const confirmLogout = window.confirm('Are you sure you want to logout?');
     if (confirmLogout) {
       // Perform your logout logic here (e.g., clearing tokens, calling logout API)
-      localStorage.clear();
+      sessionStorage.clear();
 
       // Then redirect to home
       this.router.navigate(['/home']);

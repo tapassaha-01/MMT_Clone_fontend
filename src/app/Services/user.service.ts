@@ -12,7 +12,8 @@ import { ICities } from '../Interface/ICities';
 })
 export class UserService {
  
- 
+ regularOtp: string = "otpGenerate";
+
 
   baseUrl:string = "http://localhost:9090/MMT/"
   bookingUrl:string = "http://localhost:9090/MMT/Booking/"
@@ -35,15 +36,8 @@ export class UserService {
     );
   }
     
-  // 02 - METHOD TO REGISTER USER and send otp to email
-  generateOtp(form: FormGroup<any>) :Observable<string>{
-    var tempObj: IUser={
-            userName: form.value.userName,
-            email: form.value.emailName,
-           phoneNo: form.value.numberName,
-           password: form.value.passwordName,
-           admin: false
-         } ;
+  // 02 - METHOD TO send otp to email regarding registraation
+  generateOtp(tempObj: IUser) :Observable<string>{
          return this.http.post<string>(this.baseUrl + 'generateOtp', tempObj).pipe(catchError(this.errorHandler));
   }
 
@@ -68,10 +62,13 @@ export class UserService {
     return this.http.post<Map<string, string>>(this.bookingUrl+"bookTicket", allDetailsObj).pipe(catchError(this.errorHandler));
   }
   
-  // 06 - payment otp
-  generatePaymentOtp(email: string): Observable<string> {
+  // 06 - general otp
+  regularOTPGeneration(email: string): Observable<string> {
     const params = new HttpParams()
       .set('emailId', email)
+
+      //http://localhost:9090/otp/otpGenerate?emailId=debjyoti1800%40gmail.com
+
      return this.http.post<string>(this.otpUrl+"otpGenerate", params, { responseType: 'json' as 'json' }).pipe(catchError(this.errorHandler));
   }
 
@@ -88,7 +85,7 @@ export class UserService {
 
  // 09 - FetchAllCities
  FetchAllCities(): Observable<ICities> {
-  return this.http.get<ICities>('').pipe(catchError(this.errorHandler));
+  return this.http.get<ICities>(this.adminUrl + 'getCitiesDetails').pipe(catchError(this.errorHandler));
  }
 
 

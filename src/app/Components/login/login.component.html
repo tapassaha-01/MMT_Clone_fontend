@@ -32,5 +32,18 @@
             </div>
         </form>
         <p class="already-a-member">Not a Member? <a routerLink="/signup" href="#">Register</a></p>
+        <p (click)="updatePassword()">Forgot Passsword?</p>
+
+
+        <!-- Forgot Password Popup -->
+         @if(showForgotPassword){
+            <div class="modal-overlay">
+                <div class="modal-content">
+                <app-forgot-password (close)="onForgotPasswordClose()"></app-forgot-password>
+                </div>
+            </div>
+         }
+
     </div>
 </div>
+

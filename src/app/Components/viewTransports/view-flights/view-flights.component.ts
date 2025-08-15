@@ -1,19 +1,25 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { IFlightDetails } from '../../../Interface/IFlightDetails';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CustomerbarComponent } from "../../customerbar/customerbar.component";
 import { UserService } from '../../../Services/user.service';
+import { CommonbarComponent } from "../../commonbar/commonbar.component";
 
 @Component({
   selector: 'app-view-flights',
-  imports: [CommonModule, CustomerbarComponent],
+  imports: [CommonModule, CustomerbarComponent, CommonbarComponent],
   templateUrl: './view-flights.component.html',
   styleUrl: './view-flights.component.css'
 })
 export class ViewFlightsComponent implements OnInit {
 
   private route = inject(Router);
+
+
+  loginStatus: boolean = false;
+
+
   allDetailsObj: any;
   allFlightDetailsArray: IFlightDetails[] = [];
   requiredFlightDetails: IFlightDetails = {
@@ -35,11 +41,19 @@ export class ViewFlightsComponent implements OnInit {
   private _service = inject(UserService);
     // have to change this drastically as i need get method for the flight details 
     // have to add sessionstorage.getitem and then parse it to get the object and then use it in the constructor
-    constructor(){
+    constructor(@Inject(PLATFORM_ID) private platformId: any){
       // this.GetFlightDetails();
     }
   
     ngOnInit(): void {
+
+    if (isPlatformBrowser(this.platformId)) {
+
+      var temp = sessionStorage.getItem('user');
+      if(temp != null){
+        this.loginStatus = true;
+      }
+    }
 
       // this.flightDetailsArray = GetFlightDetails(); // This function will be used to get the flight details from the database
   

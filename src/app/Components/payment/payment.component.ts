@@ -54,7 +54,7 @@ export class PaymentComponent implements OnInit{
   // Method to confirm payment
   OnPayment(_form: FormGroup){
     this.isLoading = true; // Set loading state to true
-    this._service.generatePaymentOtp(this.payerEmail).subscribe(
+    this._service.regularOTPGeneration(this.payerEmail).subscribe(
       success=>{
         if(success){
           this.isLoading = false; // Set loading state to true

@@ -3,16 +3,20 @@ import {FormsModule, NgForm } from '@angular/forms';
 import { CommonbarComponent } from "../commonbar/commonbar.component";
 import { UserService } from '../../Services/user.service';
 import { Router, RouterLink } from '@angular/router';
+import { error } from 'node:console';
+import { ForgotPasswordComponent } from "../forgot-password/forgot-password.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonbarComponent, RouterLink],
+  imports: [FormsModule, CommonbarComponent, RouterLink, ForgotPasswordComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
 
   errorMsg: string="";
+  showForgotPassword: boolean = false;
 
   constructor(private _service: UserService, private _router: Router){}
 
@@ -21,26 +25,18 @@ export class LoginComponent implements OnInit {
   }
 
   onUserLogin(_form: NgForm){
-    
-
-    //localStorage.setItem('email', _form.value.emailName);
-    //alert("login success")
-    //this._router.navigate(['/homeview']);
-
-    // sessionStorage.setItem('email', _form.value.emailName);
-    // alert("login success")
-    // this._router.navigate(['/homeview']);
-
-    
+ 
     this._service.UserLogin(_form.value.UserName, _form.value.passwordName).subscribe(
       success=>{
         if(success){
-          // sessionStorage.setItem('email', _form.value.emailName);
           const successMap = new Map<string, string>(Object.entries(success));
-          console.log(success);
-          localStorage.setItem("jwtToken", successMap.get('jwtToken') || '');
-          localStorage.setItem("user", successMap.get('user') || '');
+          sessionStorage.setItem("jwtToken", successMap.get('jwtToken') || '');
+          sessionStorage.setItem("user", successMap.get('user') || '');
           this._router.navigate(['/homeview']);
+        }
+        else{
+          alert("Please enter valid credentials");
+          this._router.navigate(['/login']);
         }
       },
       error=>{
@@ -53,4 +49,16 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+
+
+
+  // Update password method
+  updatePassword(){
+    this.showForgotPassword = true;
+  }
+  onForgotPasswordClose() {
+    this.showForgotPassword = false;
+  }
+
 }

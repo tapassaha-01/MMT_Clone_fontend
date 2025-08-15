@@ -1,25 +1,33 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { IUser } from '../../Interface/IUser';
 import { UserService } from '../../Services/user.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { CustomerbarComponent } from "../customerbar/customerbar.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, CustomerbarComponent, ReactiveFormsModule],
+  imports: [CommonModule, CustomerbarComponent, ReactiveFormsModule, ForgotPasswordComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
 
-  userProfile!: IUser;
+  userProfile: IUser = {
+    userName: '',
+    email: '',
+    phoneNo: 0,
+    password: '',
+    admin: false
+  };
   userEmail: string="";
   profilePic: string="";
   passwordEnch: string = '';
 
   profileUpdate: boolean = false;
   profilePicUpdate: boolean = false;
+  showForgotPassword: boolean = false;
   selectedFile: File | null = null;
 
   profilePicList: string[] = [
@@ -39,34 +47,26 @@ export class ProfileComponent implements OnInit {
 
   profileUpdateForm!: FormGroup;
 
-  constructor(private _service: UserService, private fb: FormBuilder) {
-
-    // this.userEmail = <string>sessionStorage.getItem('email');
-    // this.OnGetUserDetails();
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private _service: UserService, private fb: FormBuilder) {
     
-    this.userProfile = {
-      email: "debjyoti@gmail.com",
-      userName: "Debjyoti",
-      phoneNo: 9732021932,
-      password: "Debu@1800",
-      admin:false
+    if(isPlatformBrowser(this.platformId)) {
+      const user = JSON.parse(sessionStorage.getItem("user") || '{}');
+      if(user!=null){
+        this.userProfile.email = user.email;
+        this.userProfile.userName = user.userName;
+        this.userProfile.phoneNo = user.phoneNo;
+      }
     }
-  
+
+
     this.profileUpdateForm = this.fb.group({
       username: [this.userProfile.userName, [Validators.required]],
       email: [this.userProfile.email, [Validators.required, Validators.email]],
-      contactNumber: [this.userProfile.phoneNo, [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      password: [this.userProfile.password, [Validators.required, Validators.minLength(6)]],
-      name: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      gender: ['', Validators.required],
-      nationality: ['', Validators.required]
+      contactNumber: [this.userProfile.phoneNo, [Validators.required, Validators.pattern('^[0-9]{10}$')]]
     });
-
   }
 
   ngOnInit(): void {
-    this.passwordEnch = 'x'.repeat(this.userProfile.password.length);
   }
 
   
@@ -105,13 +105,21 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  // Update password method
+  updatePassword(){
+    this.showForgotPassword = true;
+  }
+  onForgotPasswordClose() {
+    this.showForgotPassword = false;
+  }
+
   // THESE TWO ARE FOR UPDATING THE PROFILE PIC
   // Update profile pic
   UpdateProfilePic(){
     this.profilePicUpdate = !this.profilePicUpdate;
   }
 
-  // Set profile pic // ******************************************************* HAVE TO UPDATE THIS METHOD SO THAT IT CAN UPDATE BOTH AVATAR PICS AND UPLOADED PICS 
+  // Set profile pic // ********************** HAVE TO UPDATE THIS METHOD SO THAT IT CAN UPDATE BOTH AVATAR PICS AND UPLOADED PICS 
   SetProfilePic(pic: string){
     this.profilePic = pic;
     this.profilePicUpdate = false;

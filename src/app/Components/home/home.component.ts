@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
 
-      var temp = localStorage.getItem('user');
+      var temp = sessionStorage.getItem('user');
       if(temp != null){
         this.user = JSON.parse(temp);
         this.loginStatus = true;

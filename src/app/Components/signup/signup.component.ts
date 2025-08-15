@@ -5,6 +5,7 @@ import { CommonbarComponent } from "../commonbar/commonbar.component";
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../Services/user.service';
 import { Router } from '@angular/router';
+import { IUser } from '../../Interface/IUser';
 
 
 @Component({
@@ -46,14 +47,19 @@ export class SignupComponent implements OnInit {
 
   OnSubmitForm(form: FormGroup){
     this.isLoading = true; // Set loading state to true
-    this._service.generateOtp(form).subscribe(
+        var tempObj: IUser={
+           userName: form.value.userName,
+           email: form.value.emailName,
+           phoneNo: form.value.numberName,
+           password: form.value.passwordName,
+           admin: false
+         };
+    this._service.generateOtp(tempObj).subscribe(
       success=>{
         if(success){
           this.isLoading = false; // Set loading state to true
           alert("Otp has been send");
-          console.log("OTP : ",success)
-          // this.router.navigate(['/login']);
-          console.log(success);
+          console.log("OTP : ",success);
           this.showOtpForm = true;
           // this.router.navigate(['/login']);
         }

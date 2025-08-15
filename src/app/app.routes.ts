@@ -1,44 +1,70 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './Components/home/home.component';
-import { SignupComponent } from './Components/signup/signup.component';
-import { LoginComponent } from './Components/login/login.component';
-import { ProfileComponent } from './Components/profile/profile.component';
-import { PaymentComponent } from './Components/payment/payment.component';
-import { FlightComponent } from './Components/Vehicles/flight/flight.component';
-import { TrainComponent } from './Components/Vehicles/train/train.component';
-import { BusComponent } from './Components/Vehicles/bus/bus.component';
-import { HotelComponent } from './Components/Vehicles/hotel/hotel.component';
-import { CabComponent } from './Components/Vehicles/cab/cab.component';
-import { ViewFlightsComponent } from './Components/viewTransports/view-flights/view-flights.component';
-import { ViewTrainsComponent } from './Components/viewTransports/view-trains/view-trains.component';
-import { FlightBookingComponent } from './Components/TransportBooking/flight-booking/flight-booking.component';
-import { TrainBookingComponent } from './Components/TransportBooking/train-booking/train-booking.component';
-import { ReviewBookingComponent } from './Components/review-booking/review-booking.component';
-import { WelcomeComponent } from './Components/welcome/welcome.component';
-import { ViewAdminComponent } from './Components/Admin/AdminControl/view-admin/view-admin.component';
-
+import { authGuard } from './Services/auth.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo:'welcome', pathMatch:'full'},
-    {path: 'welcome', component: WelcomeComponent},
-    {path: 'homeview', component: HomeComponent},
-    {path: 'signup', component: SignupComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'profile', component: ProfileComponent},
-    {path: 'admin', component: ViewAdminComponent},
-    {path: 'payment', component: PaymentComponent},
-    {path: 'reviewBooking', component: ReviewBookingComponent },
-    {path: 'flight', component: FlightComponent},
-    {path: 'train', component: TrainComponent},
-    {path: 'bus', component: BusComponent},
-    {path: 'hotel', component: HotelComponent},
-    {path: 'cab', component: CabComponent},
 
+    {path: 'welcome', loadComponent: () => import('./Components/welcome/welcome.component').then(m => m.WelcomeComponent)},
+
+    {path: 'homeview', loadComponent: () => import('./Components/home/home.component').then(m => m.HomeComponent)},
+
+    {path: 'signup', loadComponent: () => import('./Components/signup/signup.component').then(m => m.SignupComponent)},
+
+    {path: 'login', loadComponent: () => import('./Components/login/login.component').then(m => m.LoginComponent)},
+
+    // Can't iplement auth guard here as following components are required to be loaded without authentication
+    {path: 'flight', loadComponent: () => import('./Components/Vehicles/flight/flight.component').then(m => m.FlightComponent)},
     
-    {path: 'viewFlight', component: ViewFlightsComponent},
-    {path: 'viewTrain', component: ViewTrainsComponent},
+    {path: 'train', loadComponent: () => import('./Components/Vehicles/train/train.component').then(m => m.TrainComponent)},
+    
+    {path: 'bus', loadComponent: () => import('./Components/Vehicles/bus/bus.component').then(m => m.BusComponent)},
+    
+    {path: 'hotel', loadComponent: () => import('./Components/Vehicles/hotel/hotel.component').then(m => m.HotelComponent)},
+    
+    {path: 'cab', loadComponent: () => import('./Components/Vehicles/cab/cab.component').then(m => m.CabComponent)},
+    
+    {path: 'forgotPassword', loadComponent: () => import('./Components/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)},
+    
+    {path: 'viewFlight', loadComponent: () => import('./Components/viewTransports/view-flights/view-flights.component').then(m => m.ViewFlightsComponent)},
+    
+    {path: 'viewTrain', loadComponent: () => import('./Components/viewTransports/view-trains/view-trains.component').then(m => m.ViewTrainsComponent)},
 
-    {path: 'bookFlight', component: FlightBookingComponent},
-    {path: 'bookTrain', component: TrainBookingComponent}, 
-    {path: '**', component: HomeComponent}
+    {   
+        path: 'profile', 
+        loadComponent: () => import('./Components/profile/profile.component').then(m => m.ProfileComponent),
+        canActivate: [authGuard] // Protect profile route with authGuard
+    },
+
+    {
+        path: 'admin', 
+        loadComponent: () => import('./Components/Admin/AdminControl/view-admin/view-admin.component').then(m => m.ViewAdminComponent),
+        canActivate: [authGuard] // Protect admin route with authGuard
+    },
+    
+    {
+        path: 'payment', 
+        loadComponent: () => import('./Components/payment/payment.component').then(m => m.PaymentComponent),
+        canActivate: [authGuard] // Protect payment route with authGuard
+    },
+    
+    {
+        path: 'reviewBooking', 
+        loadComponent: () => import('./Components/review-booking/review-booking.component').then(m => m.ReviewBookingComponent),
+        canActivate: [authGuard] // Protect reviewBooking route with authGuard
+    },
+
+    {
+        path: 'bookFlight', 
+        loadComponent: () => import('./Components/TransportBooking/flight-booking/flight-booking.component').then(m => m.FlightBookingComponent), 
+        canActivate: [authGuard] // Protect bookFlight route with authGuard
+    },
+    
+    {
+        path: 'bookTrain', 
+        loadComponent: () => import('./Components/TransportBooking/train-booking/train-booking.component').then(m => m.TrainBookingComponent),
+        canActivate: [authGuard] // Protect bookTrain route with authGuard
+    }, 
+    
+    
+    {path: '**', loadComponent: () => import('./Components/home/home.component').then(m => m.HomeComponent)}
 ];
