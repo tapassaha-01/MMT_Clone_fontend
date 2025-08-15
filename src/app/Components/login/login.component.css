@@ -195,3 +195,25 @@
    font-size: 12px;
    color: red;
  }
+
+
+ /*  Forgot password  */
+
+.forgot-password {
+  margin-top: 25px;                /* Adds spacing above */
+  margin-left: 20px;               /* Slight left indent */
+}
+
+.forgot-password a {
+  color: #0d5c9c;                  /* A subtle blue color for links */
+  font-weight: 600;                /* Slightly bold for emphasis */
+  font-size: 1rem;                 /* Normal readable size */
+  text-decoration: underline;     /* Underlined to highlight as clickable */
+  cursor: pointer;                 /* Pointer cursor on hover */
+  transition: color 0.3s ease;
+}
+
+.forgot-password a:hover {
+  color: #0056b3;                  /* Darker blue on hover */
+  text-decoration: none;           /* Remove underline on hover for neat effect */
+}

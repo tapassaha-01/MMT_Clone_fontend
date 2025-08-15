@@ -66,9 +66,6 @@ export class UserService {
   regularOTPGeneration(email: string): Observable<string> {
     const params = new HttpParams()
       .set('emailId', email)
-
-      //http://localhost:9090/otp/otpGenerate?emailId=debjyoti1800%40gmail.com
-
      return this.http.post<string>(this.otpUrl+"otpGenerate", params, { responseType: 'json' as 'json' }).pipe(catchError(this.errorHandler));
   }
 
